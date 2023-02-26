@@ -1,7 +1,14 @@
 const express = require("express");
-const { connect } = require("../db/connection");
+const { connect, query } = require("../db/connection");
 const router = new express.Router();
 const connection = require("../db/connection");
+const bcrypt = require("bcrypt");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+// const logout = require("express-passport-logout");
+const jwt = require("jsonwebtoken");
+const JwtStrategy = require("passport-jwt").Strategy;
+const { ExtractJwt } = require("passport-jwt");
 
 router.get("/", (req, res) => {
   connection.query("SELECT * FROM meals", (err, result) => {
@@ -99,26 +106,86 @@ router.patch("/update_meal/:id", (req, res) => {
 
 // Admin access
 
-// new admin
+// register admin
 router.post("/add_admin", (req, res) => {
   const admin_name = req.body.name;
   const admin_email = req.body.email;
   const admin_pass = req.body.pass;
   // const date = Date();
   // console.log(date);
-  console.log(admin_name);
-  const new_admin =
-    "INSERT INTO admin_access (admin_name, admin_email ,admin_pass) VALUES (?,?,?)";
-  connection.query(
-    new_admin,
-    [admin_name, admin_email, admin_pass],
-    (err, result) => {
-      console.log(result);
+
+  let id = "";
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (let i = 0; i < 6; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    id += characters[randomIndex];
+  }
+
+  console.log(id);
+
+  bcrypt.hash(admin_pass, 10, (err, pass) => {
+    if (err) throw err;
+    try {
+      connection.query(
+        "INSERT INTO admin_access VALUES (?,?,?,?)",
+        [id, admin_email, pass, admin_name],
+        (err, result) => {
+          if (err) throw err;
+          console.log(result);
+        }
+      );
+    } catch (error) {
+      console.log(error);
     }
-  );
+  });
 });
 
-// get admin api
+// login admin api
+
+passport.use(
+  "local-login",
+  new LocalStrategy(
+    {
+      usernameField: "email",
+      passwordField: "password",
+    },
+    async (email, password, done) => {
+      try {
+        // Query the database for the user with the given email
+        console.log(email);
+        await connection.execute(
+          "SELECT * FROM admin_access WHERE admin_email = ?",
+          [email],
+          (err, rows) => {
+            if (err) return done(err);
+            if (!rows.length) {
+              return done(null, false); // req.flash is the way to set flashdata using connect-flash
+            }
+            bcrypt.compare(password, rows[0].admin_pass, (err, match) => {
+              console.log(match);
+              if (!match) return done(null, false);
+              return done(null, rows[0]);
+            });
+          }
+        );
+      } catch (err) {
+        return done(err);
+      }
+    }
+  )
+);
+
+router.post(
+  "/login",
+  passport.authenticate("local-login", { session: false }),
+
+  (req, res) => {
+    res.json(req.user);
+  }
+);
+
 router.get("/getadmin", (req, res) => {
   connection.query("SELECT * FROM admin_access", (err, result) => {
     if (err) {
