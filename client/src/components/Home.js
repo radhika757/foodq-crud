@@ -1,177 +1,199 @@
-import React, { useState, useEffect, useContext } from 'react'
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import CreateIcon from '@mui/icons-material/Create';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import { NavLink } from 'react-router-dom';
-import { adddata, deldata } from './context/ContextProvider';
-import { updatedata } from './context/ContextProvider'
-
-
-
+import React, { useState, useEffect, useContext } from "react";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import CreateIcon from "@mui/icons-material/Create";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { NavLink, useLocation } from "react-router-dom";
+import { adddata, deldata } from "./context/ContextProvider";
+import { updatedata } from "./context/ContextProvider";
+import Navbaar from "./Navbaar";
 
 const Home = () => {
+  const [getuserdata, setUserdata] = useState([]);
 
-    const [getuserdata, setUserdata] = useState([]);
-    console.log(getuserdata);
+  const { udata, setUdata } = useContext(adddata);
+  const { updata, setUPdata } = useContext(updatedata);
+  const { dltdata, setDLTdata } = useContext(deldata);
 
-    const { udata, setUdata } = useContext(adddata);
+  const location = useLocation();
+  const { state } = location;
+  let isAuthenticated = false;
+  let user = [];
+  if (state !== undefined) {
+    isAuthenticated = true;
+    user.push(state.user);
+  }
 
-    const {updata, setUPdata} = useContext(updatedata);
+  console.log(getuserdata);
+  console.log(state);
 
-    const {dltdata, setDLTdata} = useContext(deldata);
+  //   if (backendAuthenticated) {
+  //     setIsAuthenticated(true);
+  //   } else {
+  //     setIsAuthenticated(false);
+  //   }
+  const getdata = async () => {
+    const res = await fetch("http://localhost:3001/getdata", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-    const getdata = async () => {
+    const data = await res.json();
+    console.log(data);
 
-        const res = await fetch("/getdata", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-
-        const data = await res.json();
-        console.log(data);
-
-        if (res.status === 422 || !data) {
-            console.log("error ");
-
-        } else {
-            setUserdata(data)
-            console.log("get data");
-
-        }
+    if (res.status === 422 || !data) {
+      console.log("error ");
+    } else {
+      setUserdata(data);
+      console.log("get data");
     }
+  };
 
-    useEffect(() => {
-        getdata();
-        return () =>{
-            setUserdata([]); // unmounting the state 
-        }
-    }, [])
+  useEffect(() => {
+    getdata();
+    return () => {
+      setUserdata([]); // unmounting the state
+    };
+  }, []);
 
-    const deleteuser = async (id) => {
+  const deleteuser = async (id) => {
+    const res2 = await fetch(`http://localhost:3001/delete_meal/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-        const res2 = await fetch(`/delete_meal/${id}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
+    const deletedata = await res2.json();
+    console.log(deletedata);
 
-        const deletedata = await res2.json();
-        console.log(deletedata);
-
-        if (res2.status === 422 || !deletedata) {
-            console.log("error");
-        } else {
-            console.log("user deleted");
-            setDLTdata(deletedata)
-            getdata();
-        }
-
+    if (res2.status === 422 || !deletedata) {
+      console.log("error");
+    } else {
+      console.log("user deleted");
+      setDLTdata(deletedata);
+      getdata();
     }
+  };
 
-
-    return (
-
+  return (
+    <>
+      <Navbaar />
+      {udata ? (
         <>
-            {
-              udata ?
-                    <>
-                        <div className="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>{udata.meal_name}</strong>  added succesfully!
-                          
-                            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    </>  : ""
-            }
-            {
-                updata ?
-                    <>
-                        <div className="alert alert-success alert-dismissible fade show" role="alert">
-                           
-                            <strong>{updata.meal_name}</strong> updated succesfully!
-                            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    </> : ""
-            }
-
-            {
-                dltdata ?
-                    <>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                           
-                            <strong>{dltdata.meal_name}</strong>deleted succesfully!
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    </> : ""
-            }
-
-
-            <div className="mt-4">
-                <div className="container">
-                    <div className="add_btn mt-2 mb-2">
-                        <NavLink to="/register" className="btn btn-outline-primary">Add a Meal</NavLink>
-                    </div>
-
-                    <table className="table">
-                        <thead>
-                            <tr className="table-dark">
-                                <th scope="col">id</th>
-                                <th scope="col">Meal Name</th>
-                                <th scope="col">Meal Description</th>
-                                <th scope="col">Meal price</th>
-                                <th scope="col">Meal availability</th>
-                                <th scope="col">Operations</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            {
-                                getuserdata.map((element,id) => {
-                                    return (
-                                        <>
-                                            <tr>
-                                                <th scope="row">{id + 1}</th>
-                                                <td>{element.meal_title}</td>
-                                                <td>{element.meal_descr}</td>
-                                                <td> $ {element.meal_price} </td>
-                                                <td>{element.meal_avail}</td>
-                                                <td className="d-flex justify-flex-end ">
-                                                    {/* <NavLink to={`view/${element.id}`}> <button className="btn btn-light btn-sm"><RemoveRedEyeIcon /></button></NavLink> */}
-                                                    <NavLink to={`edit/${element.id}`}> <button className="btn btn-primary btn-sm m-2"><CreateIcon /></button></NavLink>
-                                                    <button className="btn btn-danger btn-sm m-2" onClick={() => deleteuser(element.id)}><DeleteOutlineIcon /></button>
-                                                </td>
-                                            </tr>
-                                        </>
-                                    )
-                                })
-                            }
-                        </tbody>
-                    </table>
-
-
-                </div>
-            </div>
+          <div
+            className="alert alert-success alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>{udata.meal_name}</strong> added succesfully!
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
         </>
-    )
-}
+      ) : (
+        ""
+      )}
+      {updata ? (
+        <>
+          <div
+            className="alert alert-success alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>{updata.meal_name}</strong> updated succesfully!
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+        </>
+      ) : (
+        ""
+      )}
 
-export default Home
+      {dltdata ? (
+        <>
+          <div
+            class="alert alert-danger alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>{dltdata.meal_name}</strong>deleted succesfully!
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+        </>
+      ) : (
+        ""
+      )}
+      {isAuthenticated && (
+        <div className="mt-4">
+          <div className="container">
+            {user.map((user) => {
+              return <h1>Hii Admin {user.admin_name}</h1>;
+            })}
 
+            <div className="add_btn mt-2 mb-2">
+              <NavLink to="/register" className="btn btn-outline-primary">
+                Add a Meal
+              </NavLink>
+            </div>
 
+            <table className="table">
+              <thead>
+                <tr className="table-dark">
+                  <th scope="col">id</th>
+                  <th scope="col">Meal Name</th>
+                  <th scope="col">Meal Description</th>
+                  <th scope="col">Meal price</th>
+                  <th scope="col">Meal availability</th>
+                  <th scope="col">Operations</th>
+                </tr>
+              </thead>
+              <tbody>
+                {getuserdata.map((element, id) => {
+                  return (
+                    <>
+                      <tr>
+                        <th scope="row">{id + 1}</th>
+                        <td>{element.meal_title}</td>
+                        <td>{element.meal_descr}</td>
+                        <td> $ {element.meal_price} </td>
+                        <td>{element.meal_avail}</td>
+                        <td className="d-flex justify-flex-end ">
+                          {/* <NavLink to={`view/${element.id}`}> <button className="btn btn-light btn-sm"><RemoveRedEyeIcon /></button></NavLink> */}
+                          <NavLink to={`edit/${element.id}`}>
+                            <button className="btn btn-primary btn-sm m-2">
+                              <CreateIcon />
+                            </button>
+                          </NavLink>
+                          <button
+                            className="btn btn-danger btn-sm m-2"
+                            onClick={() => deleteuser(element.id)}
+                          >
+                            <DeleteOutlineIcon />
+                          </button>
+                        </td>
+                      </tr>
+                    </>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default Home;

@@ -14,8 +14,6 @@ import LoginPage from "./components/LoginPage/LoginPage";
 function App() {
   return (
     <>
-      <Navbaar />
-
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/user" component={User} />

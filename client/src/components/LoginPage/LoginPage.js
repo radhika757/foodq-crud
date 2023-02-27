@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import "./LoginPage.css";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const history = useHistory();
   const loginHandler = async () => {
     await axios
       .post("http://localhost:3001/login", {
@@ -13,6 +14,15 @@ const LoginPage = () => {
       })
       .then((res) => {
         console.log(res.data);
+        const userData = res.data.user;
+        const isAuthenticated = res.data.isAuthenticated;
+
+        if (res.data.isAuthenticated) {
+          history.push({
+            pathname: "/",
+            state: { user: userData, isAuthenticated },
+          });
+        }
       });
   };
 

@@ -5,7 +5,7 @@ const connection = require("../db/connection");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-// const logout = require("express-passport-logout");
+//const logout = require("express-passport-logout");
 const jwt = require("jsonwebtoken");
 const JwtStrategy = require("passport-jwt").Strategy;
 const { ExtractJwt } = require("passport-jwt");
@@ -37,14 +37,21 @@ router.get("/getdata", (req, res) => {
 router.post("/create", (req, res) => {
   const { meal_name, meal_descr, meal_price, meal_avail } = req.body; //obj destructuring.
   console.log(meal_name);
+  let meal_id = "";
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+  for (let i = 0; i < 6; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    meal_id += characters[randomIndex];
+  }
   try {
     console.log("in try loop");
     const dataInsert =
-      "INSERT INTO meals (meal_title, meal_descr, meal_price, meal_avail) VALUES (?,?,?,?)";
+      "INSERT INTO meals (meal_id,meal_title, meal_descr, meal_price, meal_avail) VALUES (?,?,?,?,?)";
     connection.query(
       dataInsert,
-      [meal_name, meal_descr, meal_price, meal_avail],
+      [meal_id, meal_name, meal_descr, meal_price, meal_avail],
       (err, result) => {
         console.log(result);
         if (err) {
@@ -180,11 +187,13 @@ passport.use(
 router.post(
   "/login",
   passport.authenticate("local-login", { session: false }),
-
   (req, res) => {
-    res.json(req.user);
+    res.json({ user: req.user, isAuthenticated: true });
   }
 );
+router.get("/logout", (req, res) => {
+  req.logout();
+});
 
 router.get("/getadmin", (req, res) => {
   connection.query("SELECT * FROM admin_access", (err, result) => {
