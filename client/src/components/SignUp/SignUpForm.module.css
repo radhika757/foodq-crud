@@ -1,0 +1,39 @@
+.main-frame {
+  position: absolute;
+  /* border: 1px solid black; */
+  right: 30px;
+  top: 61em;
+  padding: 40px;
+  height: 20em;
+  width: 44em;
+}
+
+.main-frame h2,
+h5 {
+  position: relative;
+  left: 15px;
+}
+
+.main-frame input,
+textarea {
+  padding: 20px 20px;
+  width: 35em;
+  margin: 10px;
+  border: 1px solid gainsboro;
+}
+
+.main-frame button {
+  padding: 25px 20px;
+  width: 30em;
+  background-color: #b94517;
+  border: none;
+  border-radius: 30px;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  /* text-align: center; */
+  /* display: flex;
+   justify-content: center; */
+  position: relative;
+  left: 60px;
+}

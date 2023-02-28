@@ -79,6 +79,16 @@ router.delete("/delete_meal/:id", (req, res) => {
     }
   });
 });
+//all-meals
+router.get("/all-meals", (req, res) => {
+  connection.query("SELECT * FROM meals", (err, result) => {
+    if (err) {
+      res.status(422).json("Oops! Something went wrong", err);
+    } else {
+      res.status(201).json(result);
+    }
+  });
+});
 
 // get single meal
 router.get("/single_meal/:id", (req, res) => {
