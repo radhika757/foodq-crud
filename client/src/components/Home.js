@@ -141,7 +141,15 @@ const Home = () => {
             {user.map((user) => {
               return <h1>Hii Admin {user.admin_name}</h1>;
             })}
-
+            <NavLink
+              to={{
+                pathname: "/admins",
+                state: { isAuthenticated: true },
+              }}
+              className="btn btn-outline-primary m-2"
+            >
+              Admin
+            </NavLink>
             <div className="add_btn mt-2 mb-2">
               <NavLink to="/register" className="btn btn-outline-primary">
                 Add a Meal

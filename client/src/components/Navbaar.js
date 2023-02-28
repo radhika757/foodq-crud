@@ -59,14 +59,20 @@ const Navbaar = () => {
               </ul>
             )}
 
-            <form className="d-flex">
-              <button
-                className="btn btn-outline-success"
-                type="submit"
-                onClick={logoutHandler}
-              >
-                {isAuthenticated ? "Logout" : "login"}
-              </button>
+            <form>
+              {isAuthenticated ? (
+                <button
+                  className="btn btn-outline-success"
+                  type="submit"
+                  onClick={logoutHandler}
+                >
+                  Logout
+                </button>
+              ) : (
+                <NavLink to="/login" className="btn btn-primary">
+                  Login
+                </NavLink>
+              )}
             </form>
           </div>
         </div>

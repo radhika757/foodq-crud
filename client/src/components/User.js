@@ -26,11 +26,7 @@ const User = () => {
   };
   return (
     <>
-      <div>
-        <NavLink to="/admins" className="btn btn-outline-primary m-2">
-          Admin
-        </NavLink>
-      </div>
+      <div></div>
       <div className="container-fluid px-1 py-5 mx-auto">
         <div className="row d-flex justify-content-center">
           <div className="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
