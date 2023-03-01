@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { adddata } from "./context/ContextProvider";
-import  './Register.css';
+import "./Register.css";
 
 const Register = () => {
   const { udata, setUdata } = useContext(adddata);
@@ -32,7 +32,7 @@ const Register = () => {
     const { meal_name, meal_descr, meal_price, meal_avail } = inpval;
     // console.log(inpval);
 
-    const res = await fetch("/create", {
+    const res = await fetch("http://localhost:3001/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +57,7 @@ const Register = () => {
       setUdata(data);
       console.log("Meal added");
     }
-    // }
+    }
   };
 
   return (
@@ -86,7 +86,10 @@ const Register = () => {
                 />
               </div>
               <div className="form-group col-sm-6 flex-column d-flex">
-                <label htmlFor="exampleInputPassword1" className="form-control-label px-3">
+                <label
+                  htmlFor="exampleInputPassword1"
+                  className="form-control-label px-3"
+                >
                   Meal detail
                 </label>
                 <input
@@ -98,11 +101,14 @@ const Register = () => {
                   id="exampleInputPassword1"
                 />
               </div>
-              </div>
+            </div>
             {/* -- */}
             <div className="row justify-content-between text-left m-4">
               <div className="form-group col-sm-6 flex-column d-flex">
-                <label htmlFor="exampleInputPassword1" className="form-control-label px-3">
+                <label
+                  htmlFor="exampleInputPassword1"
+                  className="form-control-label px-3"
+                >
                   Meal price
                 </label>
                 <input
@@ -115,7 +121,10 @@ const Register = () => {
                 />
               </div>
               <div className="form-group col-sm-6 flex-column d-flex">
-                <label htmlFor="exampleInputPassword1" className="form-control-label px-3">
+                <label
+                  htmlFor="exampleInputPassword1"
+                  className="form-control-label px-3"
+                >
                   Meal availabilty
                 </label>
                 {/* <small>- A / NA</small> */}
@@ -128,29 +137,28 @@ const Register = () => {
                   id="exampleInputPassword1"
                 />
               </div>
-              </div>
-                {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
-                          <label for="exampleInputPassword1" class="form-label">Work</label>
-                          <input type="text" value={inpval.work} onChange={setdata} name="work" class="form-control" id="exampleInputPassword1" />
-                      </div>
-                      <div class="mb-3 col-lg-6 col-md-6 col-12">
-                          <label for="exampleInputPassword1" class="form-label">Address</label>
-                          <input type="text" value={inpval.add} onChange={setdata} name="add" class="form-control" id="exampleInputPassword1" />
-                      </div> */}
-                    {/* <div class="mb-3 col-lg-12 col-md-12 col-12">
-                        <label for="exampleInputPassword1" class="form-label">File Input</label>
-                        <input type='file' name="img_input" value={inpval.img} onChange={setdata} className="form-control" id="img_input" accept="image/*" />
+            </div>
+            {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
+                        <label for="exampleInputPassword1" class="form-label">Work</label>
+                        <input type="text" value={inpval.work} onChange={setdata} name="work" class="form-control" id="exampleInputPassword1" />
+                    </div>
+                    <div class="mb-3 col-lg-6 col-md-6 col-12">
+                        <label for="exampleInputPassword1" class="form-label">Address</label>
+                        <input type="text" value={inpval.add} onChange={setdata} name="add" class="form-control" id="exampleInputPassword1" />
+                    </div>
+                    <div class="mb-3 col-lg-12 col-md-12 col-12">
+                        <label for="exampleInputPassword1" class="form-label">Description</label>
+                        <textarea name="desc" value={inpval.desc} onChange={setdata} className="form-control" id="" cols="30" rows="5"></textarea>
                     </div> */}
-              <div class="row justify-content-center">
-                <button
-                  type="submit"
-                  onClick={addinpdata}
-                  className="btn btn-primary form-group col-sm-4"
-                >
-                  Submit
-                </button>
-              </div>
-            
+            <div class="row justify-content-center">
+              <button
+                type="submit"
+                onClick={addinpdata}
+                className="btn btn-primary form-group col-sm-4"
+              >
+                Submit
+              </button>
+            </div>
           </form>
         </div>
       </div>

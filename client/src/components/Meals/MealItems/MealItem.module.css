@@ -1,0 +1,44 @@
+
+.meal-wrap{
+  display: flex;
+  justify-content:space-between;
+  width: 20em;
+}
+.meal {
+    display: flex;
+    justify-content:flex-start;
+    margin: 0.5rem;
+    padding: 1em;
+    border: 2px solid #ccc;
+    border-radius: 14px;
+    width: 18em;
+  }
+  
+  .meal h3 {
+    margin: 0 0 0.25rem 0;
+  }
+
+  /* for name, description, price  */
+  .meal-new{
+padding: 8px;
+  }
+  
+  .fimg{
+    height: 8em;
+    width: 10em;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 14px;
+  }
+
+  .description {
+    font-style: italic;
+  }
+  
+  .price {
+    margin-top: 0.25rem;
+    font-weight: bold;
+    color: #ad5502;
+    font-size: 1.25rem;
+  }
+

@@ -1,32 +1,55 @@
-body{
-    background-color: floralwhite;
+.add_btn {
+  text-align: right;
 }
 
-.add_btn{
-    text-align: right;
+.container {
+  overflow: auto;
 }
 
-.container{
-    overflow: auto;
+.left_view h3 {
+  font-size: 21px;
 }
 
-.left_view h3{
-    font-size: 21px;
+.left_view p {
+  font-weight: 600;
 }
 
-.left_view p{
-    font-weight: 600;
+.left_view span {
+  font-weight: 400;
 }
 
-.left_view span{
-    font-weight: 400;
+.right_view p {
+  font-weight: 600;
 }
 
-.right_view p{
-    font-weight: 600;
+.right_view span {
+  font-weight: 400;
+}
+.App {
+  text-align: center;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
 
-.right_view span{
-    font-weight: 400;
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
