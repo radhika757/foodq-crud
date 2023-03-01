@@ -79,8 +79,7 @@ const Home = () => {
               udata ?
                     <>
                         <div className="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>{udata.meal_name}</strong>  added succesfully!
-                          
+                            <strong>{udata.meal_title}</strong> added succesfully!
                             <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </>  : ""
@@ -90,7 +89,7 @@ const Home = () => {
                     <>
                         <div className="alert alert-success alert-dismissible fade show" role="alert">
                            
-                            <strong>{updata.meal_name}</strong> updated succesfully!
+                            <strong>{updata.meal_title}</strong> updated succesfully!
                             <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </> : ""
@@ -101,7 +100,7 @@ const Home = () => {
                     <>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                            
-                            <strong>{dltdata.meal_name}</strong>deleted succesfully!
+                            <strong>{dltdata.meal_title}</strong>deleted succesfully!
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </> : ""
@@ -111,7 +110,7 @@ const Home = () => {
             <div className="mt-4">
                 <div className="container">
                     <div className="add_btn mt-2 mb-2">
-                        <NavLink to="/register" className="btn btn-outline-primary">Add a Meal</NavLink>
+                        <NavLink to="/register" className="btn btn-outline-primary m-2">Add a Meal</NavLink>
                     </div>
 
                     <table className="table">

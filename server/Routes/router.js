@@ -2,6 +2,8 @@ const express = require("express");
 const { connect } = require("../db/connection");
 const router = new express.Router();
 const connection = require("../db/connection");
+const multer = require('multer');
+
 
 router.get("/", (req, res) => {
   connection.query("SELECT * FROM meals", (err, result) => {
@@ -82,7 +84,7 @@ router.get("/single_meal/:id", (req, res) => {
 // update meal api
 router.patch("/update_meal/:id", (req, res) => {
   const { id } = req.params;
-  const data = req.body; //updated data
+  const data = req.body; //updated data 
   console.log(data);
   connection.query(
     "UPDATE meals SET ? WHERE id = ?",

@@ -18,6 +18,7 @@ function App() {
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/user" component={User} />
+      <Route path="/dashboard" component={Home} />
       <Route path="/admins" component={Admins} />
       <Route exact path="/register" component={Register} />
     
