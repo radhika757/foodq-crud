@@ -1,0 +1,11 @@
+
+.outline{
+    /* border: 1px solid #DDA0DD; */
+    display: flex;
+    flex-grow: 4;
+    position: relative;
+    top: 14em;
+    background-color: #E6E6FA;
+    height: 15em;
+}
+

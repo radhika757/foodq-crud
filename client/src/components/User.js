@@ -1,42 +1,38 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import { NavLink } from "react-router-dom";
-
+import { NavLink, useHistory } from "react-router-dom";
 
 const User = () => {
   const [adName, setAdName] = useState("");
   const [adPass, setAdPass] = useState("");
   const [adEmail, setAdEmail] = useState("");
+
   //   const [date, setDate] = useState("");
   //   const [adminList, setAdminList] = useState([]);
 
-  const submitData = () => {
-    Axios.post("/add_admin", {
+  const history = useHistory();
+  console.log(adName);
+  const submitData = async (e) => {
+    e.preventDefault();
+    await Axios.post("http://localhost:3001/add_admin", {
       name: adName,
       pass: adPass,
       email: adEmail,
     });
-    if (Axios.post) {
-      alert("User added");
-      // setTimeout(()=>{
-      //     window.location.reload(true);
-      // },2000);
-    }
+    history.push("/login");
+    setAdName("");
+    setAdEmail("");
+    setAdPass("");
   };
   return (
     <>
-      <div>
-        
-        <NavLink to="/admins" className="btn btn-outline-primary m-2">
-          Admin
-        </NavLink>
-      </div>
+      <div></div>
       <div className="container-fluid px-1 py-5 mx-auto">
         <div className="row d-flex justify-content-center">
           <div className="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
             {/* <NavLink to="/">Home</NavLink> */}
-            <h2>Enter a Admin</h2>
-            <form className="form-card mt-4">
+            <h2>Register an Admin</h2>
+            <form className="form-card mt-4" onSubmit={submitData}>
               <div className="row justify-content-between text-left m-4">
                 <div className="form-group col-sm-6 flex-column d-flex">
                   <label
@@ -48,6 +44,7 @@ const User = () => {
                   <input
                     type="text"
                     //   value={inpval.name}
+                    value={adName}
                     onChange={(e) => {
                       setAdName(e.target.value);
                     }}
@@ -67,6 +64,7 @@ const User = () => {
                   {/* <small>- A / NA</small> */}
                   <input
                     type="password"
+                    value={adPass}
                     //   value={inpval.mobile}
                     onChange={(e) => {
                       setAdPass(e.target.value);
@@ -87,6 +85,7 @@ const User = () => {
                     Admin email
                   </label>
                   <input
+                    value={adEmail}
                     type="email"
                     //   value={inpval.age}
                     onChange={(e) => {
@@ -131,11 +130,17 @@ const User = () => {
               <div className="row justify-content-center">
                 <button
                   type="submit"
-                  onClick={submitData}
                   className="btn btn-success form-group col-sm-4"
                 >
                   Add
                 </button>
+                <NavLink
+                  to="/login"
+                  className="btn btn-primary form-group col-sm-4"
+                  style={{ margin: "8px" }}
+                >
+                  Login
+                </NavLink>
               </div>
             </form>
           </div>

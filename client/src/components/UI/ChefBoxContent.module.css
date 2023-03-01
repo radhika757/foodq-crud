@@ -1,0 +1,35 @@
+.content {
+  display: flex;
+  /* justify-content:space-around; */
+  /* align-items: flex-start; */
+}
+
+.content img {
+  height: 10em;
+  width: 10em;
+  border-radius: 50%;
+  position: relative;
+  left: 20em;
+  top: 3em;
+}
+
+.brief {
+  position: relative;
+  left: 22em;
+  top: 2em;
+  line-height: 3px;
+}
+
+.brief h4 {
+  word-spacing: 5px;
+  font-weight: lighter;
+}
+
+.brief p{
+    margin-top: 40px;
+    width: 800px;
+    line-height: 2;
+    /* text-indent: 5px; */
+}
+
+
