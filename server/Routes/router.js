@@ -75,7 +75,7 @@ router.delete("/delete_meal/:id", (req, res) => {
     if (err) {
       res.status(422).json("Data not found");
     } else {
-      res.status(201).json(result);
+      res.status(201).json(result); 
     }
   });
 });
@@ -83,7 +83,7 @@ router.delete("/delete_meal/:id", (req, res) => {
 router.get("/all-meals", (req, res) => {
   connection.query("SELECT * FROM meals", (err, result) => {
     if (err) {
-      res.status(422).json("Oops! Something went wrong", err);
+      res.status(422).json("Oops ! Something went wrong", err); 
     } else {
       res.status(201).json(result);
     }
@@ -147,7 +147,7 @@ router.post("/add_admin", (req, res) => {
     try {
       connection.query(
         "INSERT INTO admin_access VALUES (?,?,?,?)",
-        [id, admin_email, pass, admin_name],
+        [id,admin_name, admin_email, pass ],
         (err, result) => {
           if (err) throw err;
           console.log(result);
@@ -158,6 +158,7 @@ router.post("/add_admin", (req, res) => {
     }
   });
 });
+
 
 // login admin api
 
@@ -172,15 +173,21 @@ passport.use(
       try {
         // Query the database for the user with the given email
         console.log(email);
+        console.log(password);
         await connection.execute(
           "SELECT * FROM admin_access WHERE admin_email = ?",
           [email],
           (err, rows) => {
-            if (err) return done(err);
-            if (!rows.length) {
-              return done(null, false); // req.flash is the way to set flashdata using connect-flash
-            }
-            bcrypt.compare(password, rows[0].admin_pass, (err, match) => {
+            console.log('loop 1');
+            console.log(rows);
+            console.log(rows[0].admin_pass);
+            console.log(password);
+            // if (err) return done(err); 
+          //   if (!rows.length) {
+          // console.log('user does not exist');
+          //     return done(null, false); // req.flash is the way to set flashdata using connect-flash
+          //   }
+            bcrypt.compare(password, rows[0].admin_pass, (err, match) => { 
               console.log(match);
               if (!match) return done(null, false);
               return done(null, rows[0]);
@@ -188,6 +195,7 @@ passport.use(
           }
         );
       } catch (err) {
+        console.log('catch');
         return done(err);
       }
     }

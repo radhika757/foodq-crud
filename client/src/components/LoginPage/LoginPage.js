@@ -6,7 +6,11 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
+
   const loginHandler = async () => {
+    console.log('hi');
+    console.log(email);
+    console.log(password);
     await axios
       .post("http://localhost:3001/login", {
         email: email,
@@ -14,6 +18,7 @@ const LoginPage = () => {
       })
       .then((res) => {
         console.log(res.data);
+        console.log('res');
         const userData = res.data.user;
         const isAuthenticated = res.data.isAuthenticated;
 

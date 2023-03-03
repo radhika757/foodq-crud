@@ -118,7 +118,7 @@ const Home = () => {
                             <tr className="table-dark">
                                 <th scope="col">id</th>
                                 <th scope="col">Meal Name</th>
-                                <th scope="col">Meal Description</th>
+                                <th scope="col">Meal Descriptionm</th>
                                 <th scope="col">Meal price</th>
                                 <th scope="col">Meal availability</th>
                                 <th scope="col">Operations</th>

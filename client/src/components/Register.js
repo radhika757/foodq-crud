@@ -57,7 +57,7 @@ const Register = () => {
       setUdata(data);
       console.log("Meal added");
     }
-    }
+    // }
   };
 
   return (
