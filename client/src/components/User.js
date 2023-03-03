@@ -11,8 +11,9 @@ const User = () => {
   //   const [adminList, setAdminList] = useState([]);
 
   const history = useHistory();
-  console.log(adName);
+ 
   const submitData = async (e) => {
+    console.log(adName); console.log(adPass); console.log(adEmail);
     e.preventDefault();
     await Axios.post("http://localhost:3001/add_admin", {
       name: adName,
@@ -23,15 +24,17 @@ const User = () => {
     setAdName("");
     setAdEmail("");
     setAdPass("");
+    alert("Admin Added");
   };
   return (
     <>
-      <div></div>
+      <div><NavLink to="/admins">Admin</NavLink></div>
       <div className="container-fluid px-1 py-5 mx-auto">
         <div className="row d-flex justify-content-center">
           <div className="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
             {/* <NavLink to="/">Home</NavLink> */}
             <h2>Register an Admin</h2>
+         
             <form className="form-card mt-4" onSubmit={submitData}>
               <div className="row justify-content-between text-left m-4">
                 <div className="form-group col-sm-6 flex-column d-flex">
@@ -96,37 +99,8 @@ const User = () => {
                     id="addemail"
                   />
                 </div>
-                {/* <div className="form-group col-sm-6 flex-column d-flex">
-                  <label
-                    htmlFor="exampleInputPassword1"
-                    className="form-control-label px-3"
-                  >
-                    Date
-                  </label>
-                  <input
-                    type="date"
-                    //   value={inpval.email}
-                      onChange={(e)=>{
-                        setDate(e.target.value);
-                      }}
-                    name="date"
-                    className="form-control"
-                    id="addate"
-                  />
-                </div> */}
               </div>
-              {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
-                        <label for="exampleInputPassword1" class="form-label">Work</label>
-                        <input type="text" value={inpval.work} onChange={setdata} name="work" class="form-control" id="exampleInputPassword1" />
-                    </div>
-                    <div class="mb-3 col-lg-6 col-md-6 col-12">
-                        <label for="exampleInputPassword1" class="form-label">Address</label>
-                        <input type="text" value={inpval.add} onChange={setdata} name="add" class="form-control" id="exampleInputPassword1" />
-                    </div>
-                    <div class="mb-3 col-lg-12 col-md-12 col-12">
-                        <label for="exampleInputPassword1" class="form-label">Description</label>
-                        <textarea name="desc" value={inpval.desc} onChange={setdata} className="form-control" id="" cols="30" rows="5"></textarea>
-                    </div> */}
+        
               <div className="row justify-content-center">
                 <button
                   type="submit"
@@ -134,13 +108,13 @@ const User = () => {
                 >
                   Add
                 </button>
-                <NavLink
+                {/* <NavLink
                   to="/login"
                   className="btn btn-primary form-group col-sm-4"
                   style={{ margin: "8px" }}
                 >
                   Login
-                </NavLink>
+                </NavLink> */}
               </div>
             </form>
           </div>

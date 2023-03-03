@@ -6,22 +6,27 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 const Admins = (props) => {
   const [getadmindata, setAdmindata] = useState([]);
-
+// console.log(getadmindata)
   Axios.get("http://localhost:3001/getadmin").then((response) => {
     setAdmindata(response.data);
+    //  console.log(response.data);
   });
-  console.log(props);
-  let isAuthenticated = false;
-  if (props.location.state !== undefined) {
-    if (props.location.state.isAuthenticated) {
-      isAuthenticated = true;
-    }
+  
+  const deleteadmin = (id) =>{
+    console.log(`delete ${id}`);
   }
-
+  // let isAuthenticated = false;
+  // if (props.location.state !== undefined) {
+  //   if (props.location.state.isAuthenticated) {
+  //     isAuthenticated = true;
+  //   }
+    
+  // }
+  // console.log(isAuthenticated);
   return (
     <>
-      {isAuthenticated ? (
-        <table className="table m-2">
+      {/* {isAuthenticated ? ( */}
+        <table className="table">
           <thead>
             <tr className="table-dark">
               <th scope="col">id</th>
@@ -41,15 +46,14 @@ const Admins = (props) => {
                     <td>{element.admin_email}</td>
                     <td>{element.admin_pass} </td>
 
-                    <td className="d-flex justify-flex-end ">
+                    <td className="d-flex ">
                       {/* <NavLink to={`view/${element.id}`}> <button className="btn btn-light btn-sm"><RemoveRedEyeIcon /></button></NavLink> */}
-                      <NavLink to={`edit/${element.id}`}>
-                        {" "}
-                        <button className="btn btn-primary btn-sm m-2">
-                          <CreateIcon />
-                        </button>
-                      </NavLink>
-                      <button className="btn btn-danger btn-sm m-2" onClick="">
+                     
+                         <NavLink to={`edit/${element.id}`}><button className="btn btn-primary btn-sm m-2"><CreateIcon /></button></NavLink>
+                          
+                       
+                      
+                      <button className="btn btn-danger btn-sm p-2" onClick={deleteadmin}>
                         <DeleteOutlineIcon />
                       </button>
                     </td>
@@ -59,9 +63,9 @@ const Admins = (props) => {
             })}
           </tbody>
         </table>
-      ) : (
+      {/* ) : (
         <h1>Please Login</h1>
-      )}
+      ) */}
     </>
   );
 };

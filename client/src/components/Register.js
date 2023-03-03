@@ -63,7 +63,7 @@ const Register = () => {
   return (
     <div className="container-fluid px-1 py-5 mx-auto">
       <div className="row d-flex justify-content-center">
-        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+        <div className="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
           {/* <NavLink to="/">Home</NavLink> */}
           <h2>Enter a new dish</h2>
           <form className="form-card mt-4" encType="multipart/form-data" method="POST">
@@ -150,7 +150,7 @@ const Register = () => {
                         <label for="exampleInputPassword1" class="form-label">Description</label>
                         <textarea name="desc" value={inpval.desc} onChange={setdata} className="form-control" id="" cols="30" rows="5"></textarea>
                     </div> */}
-            <div class="row justify-content-center">
+            <div className="row justify-content-center">
               <button
                 type="submit"
                 onClick={addinpdata}

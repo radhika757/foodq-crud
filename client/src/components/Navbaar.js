@@ -70,7 +70,7 @@ const Navbaar = () => {
                 </button>
               ) : (
                 <NavLink to="/login" className="btn btn-primary">
-                  Login
+                  Login 
                 </NavLink>
               )}
             </form>

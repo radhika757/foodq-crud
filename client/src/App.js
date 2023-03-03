@@ -16,6 +16,7 @@ import Login from "./components/Layout/Login";
 function App() {
   return (
     <>
+    {/* <AdminHome/> */}
       <Switch>
         <Route exact path="/home" component={Home} />
         <Route exact path="/Admin" component={Login} />

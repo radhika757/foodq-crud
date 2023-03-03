@@ -16,9 +16,9 @@ const Edit = () => {
     meal_price: 0,
     meal_avail: "",
   });
-
+  // console.log(inpval);
   const setdata = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     const { name, value } = e.target;
     setINP((preval) => {
       return {
@@ -29,23 +29,26 @@ const Edit = () => {
   };
 
   const { id } = useParams("");
-  console.log(id);
+  // console.log(id);
 
   const getdata = async () => {
-    const res = await fetch(`/single_meal/${id}`, {
+    // console.log(id);
+    const res = await fetch(`http://localhost:3001/single_meal/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     });
-
+    console.log("dataas");
     const data = await res.json();
     console.log(data);
+    console.log("data");
 
     if (res.status === 422 || !data) {
       console.log("error");
     } else {
       setINP(data[0]);
+      // console.log(setINP(data[0]));
       console.log("get data");
     }
   };
@@ -58,11 +61,15 @@ const Edit = () => {
     e.preventDefault();
 
     const { meal_title, meal_descr, meal_price, meal_avail } = inpval;
-    // console.log(meal_name);console.log(meal_descr);console.log(meal_price);
-    const res2 = await fetch(`/update_meal/${id}`, {
+    console.log(meal_title);
+    console.log(meal_descr);
+    console.log(meal_price);
+    const res2 = await fetch(`http://localhost:3001/update_meal/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify({
         meal_title,
@@ -86,12 +93,15 @@ const Edit = () => {
   return (
     <div className="container-fluid px-1 py-5 mx-auto">
       <div className="row d-flex justify-content-center">
-        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+        <div className="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
           {/* <NavLink to="/">home2</NavLink> */}
           <form className="form-card mt-4">
             <div className="row justify-content-between text-left m-4">
               <div className="orm-group col-sm-6 flex-column d-flex">
-                <label htmlFor="exampleInputEmail1" className="form-control-label px-3">
+                <label
+                  htmlFor="exampleInputEmail1"
+                  className="form-control-label px-3"
+                >
                   Meal Name
                 </label>
                 <input
@@ -105,7 +115,10 @@ const Edit = () => {
                 />
               </div>
               <div className="orm-group col-sm-6 flex-column d-flex">
-                <label htmlFor="exampleInputPassword1" className="form-control-label px-3">
+                <label
+                  htmlFor="exampleInputPassword1"
+                  className="form-control-label px-3"
+                >
                   Meal Description
                 </label>
                 <input
@@ -116,11 +129,14 @@ const Edit = () => {
                   className="form-control"
                   id="exampleInputPassword1"
                 />
-                </div>
               </div>
-              <div className="row justify-content-between text-left m-4">
+            </div>
+            <div className="row justify-content-between text-left m-4">
               <div className="orm-group col-sm-6 flex-column d-flex">
-                <label htmlFor="exampleInputPassword1" className="form-control-label px-3">
+                <label
+                  htmlFor="exampleInputPassword1"
+                  className="form-control-label px-3"
+                >
                   Meal price
                 </label>
                 <input
@@ -133,7 +149,10 @@ const Edit = () => {
                 />
               </div>
               <div className="orm-group col-sm-6 flex-column d-flex">
-                <label htmlFor="exampleInputPassword1" className="form-control-label px-3">
+                <label
+                  htmlFor="exampleInputPassword1"
+                  className="form-control-label px-3"
+                >
                   Availability
                 </label>
                 <input
@@ -145,8 +164,8 @@ const Edit = () => {
                   id="exampleInputPassword1"
                 />
               </div>
-              </div>
-              {/* <div class="orm-group col-sm-6 flex-column d-flex">
+            </div>
+            {/* <div class="orm-group col-sm-6 flex-column d-flex">
                         <label for="exampleInputPassword1" class="form-label">Work</label>
                         <input type="text" value={inpval.work} onChange={setdata} name="work" class="form-control" id="exampleInputPassword1" />
                     </div>
@@ -159,14 +178,13 @@ const Edit = () => {
                         <textarea name="desc" value={inpval.desc} onChange={setdata} className="form-control" id="" cols="30" rows="5"></textarea>
                     </div> */}
 
-              <button
-                type="submit"
-                onClick={updateuser}
-                className="btn btn-primary"
-              >
-                Update
-              </button>
-            
+            <button
+              type="submit"
+              onClick={updateuser}
+              className="btn btn-primary"
+            >
+              Update
+            </button>
           </form>
         </div>
       </div>

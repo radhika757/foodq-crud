@@ -11,6 +11,8 @@ import { Stack } from "@mui/material";
 const AdminHome = () => {
   const [getuserdata, setUserdata] = useState([]);
 
+  console.log("hey");
+
   const { udata, setUdata } = useContext(adddata);
   const { updata, setUPdata } = useContext(updatedata);
   const { dltdata, setDLTdata } = useContext(deldata);
@@ -140,7 +142,7 @@ const AdminHome = () => {
         <div className="mt-4">
           <div className="container">
             {user.map((user) => {
-              return <h1>Hii Admin {user.admin_name}</h1>;
+              return <h1>Hey {user.admin_name}</h1>;
             })}
             <div className="row">
               <div className="col">
@@ -153,11 +155,11 @@ const AdminHome = () => {
                 >
                   Admin
                 </NavLink>
-                <div className="add_btn mt-2 mb-2">
+                {/* <div className="add_btn"> */}
                   <NavLink to="/register" className="btn btn-outline-primary">
                     Add a Meal
                   </NavLink>
-                </div>
+                {/* </div> */}
 
                 <table className="table">
                   <thead>
@@ -176,21 +178,17 @@ const AdminHome = () => {
                         <>
                           <tr>
                             <th scope="row">{id + 1}</th>
+                            {/* <th scope="row">{element.meal_id}</th> */}
                             <td>{element.meal_title}</td>
                             <td>{element.meal_descr}</td>
                             <td> $ {element.meal_price} </td>
                             <td>{element.meal_avail}</td>
-                            <td className="d-flex justify-flex-end ">
+                            <td className="d-flex ">
                               {/* <NavLink to={`view/${element.id}`}> <button className="btn btn-light btn-sm"><RemoveRedEyeIcon /></button></NavLink> */}
-                              <NavLink
-                                to={`edit/${element.id}`}
-                                className="btn btn-primary"
-                              >
-                                <CreateIcon />
-                              </NavLink>
+                              <NavLink to={`edit/${element.meal_id}`}><button className="btn btn-primary btn-sm m-2"><CreateIcon /></button></NavLink>
                               <button
-                                className="btn btn-danger"
-                                onClick={() => deleteuser(element.id)}
+                                className="btn btn-danger btn-sm m-2"
+                                onClick={() => deleteuser(element.meal_id)}
                               >
                                 <DeleteOutlineIcon />
                               </button>

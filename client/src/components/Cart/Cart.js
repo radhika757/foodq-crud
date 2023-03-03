@@ -1,14 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./Cart.module.css";
 import Modal from "../UI/Modal";
 import { useContext } from "react";
 import CartContext from "../../Store/cart-context";
 import CartItem from "./CartItem";
+import Checkout from "./Checkout";
+import empty from "../../components/assets/emptyC.png";
 
 const Cart = (props) => {
+  const [isCheckout, setIsCheckout] = useState(false);
+
   const cartCtx = useContext(CartContext);
   // console.log(cartCtx);
-  const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`; // to keep 2 decimal places fixed.
+  const totalAmount = `$${cartCtx.totalAmount}`; // to keep 2 decimal places fixed.
 
   // to check if the cart has items
   const hasItems = cartCtx.items.length > 0;
@@ -20,6 +24,11 @@ const Cart = (props) => {
   // Trigger the CartProvider add ()
   const addItemToCartHandler = (item) => {
     cartCtx.addItem({ ...item, amount: 1 });
+  };
+
+   // order handler
+   const orderHandler = () => {
+    setIsCheckout(true);
   };
 
   const cartItems = (
@@ -38,6 +47,21 @@ const Cart = (props) => {
     </ul>
   );
 
+  const modalActions = (
+    <div className={styles.actions}>
+      <button className={styles["button--alt"]} onClick={props.onClose}>
+        Close
+      </button>
+
+      {/* Order btn should only show up when there are items in cart. */}
+      {hasItems && (
+        <button className={styles.button} onClick={orderHandler}>
+          Order
+        </button>
+      )}
+    </div>
+  );
+
   return (
     // key={props.id} each child in a list should have a unique key.
     <Modal onClose={props.onClose}>
@@ -46,13 +70,26 @@ const Cart = (props) => {
         <span>Total Amount</span>
         <span>{totalAmount}</span>
       </div>
-      <div className={styles.actions}>
+      {!hasItems && (
+        <div className={styles.cartpstn}>
+          <div>
+            <img src={empty} />
+          </div>
+          <div>
+            <p className={styles.empty}>Your cart feels light!</p>
+          </div>
+        </div>
+      )}
+      {!isCheckout && modalActions}
+      {/* Ex of props drilling  */}
+      {isCheckout && <Checkout onCancel={props.onClose} />}
+      {/* <div className={styles.actions}>
         <button className={styles["button--alt"]} onClick={props.onClose}>
           Close
-        </button>
-        {/* Order btn should only show up when there are items in cart. */}
-        {hasItems && <button className={styles.button}>Order</button>}
-      </div>
+        </button> */}
+      {/* Order btn should only show up when there are items in cart. */}
+      {/* {hasItems && <button className={styles.button}>Order</button>}
+      </div> */}
     </Modal>
   );
 };

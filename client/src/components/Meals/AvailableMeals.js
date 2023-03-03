@@ -9,38 +9,38 @@ import schnit from "../assets/schnitzel.jpg";
 import salad from "../assets/salad.jpg";
 import axios from "axios";
 // an array of dummy meals ( we can fetch this from a database)
-const dummy_meals = [
-  {
-    id: "m1",
-    name: "Lasagne",
-    description: "Creamy Pasta",
-    price: 22.9,
-    img: sushi,
-  },
+// const dummy_meals = [
+//   {
+//     id: "m1",
+//     name: "Lasagne",
+//     description: "Creamy Pasta",
+//     price: 22.9,
+//     img: sushi,
+//   },
 
-  {
-    id: "m2",
-    name: "Brodetto",
-    description: "Fish soup",
-    price: 33.3,
-    img: schnit,
-  },
+//   {
+//     id: "m2",
+//     name: "Brodetto",
+//     description: "Fish soup",
+//     price: 33.3,
+//     img: schnit,
+//   },
 
-  {
-    id: "m3",
-    name: "Gelato",
-    description: "Local flavors",
-    price: 20.22,
-    img: rice,
-  },
-  {
-    id: "m4",
-    name: "Salad",
-    description: "Something Green",
-    price: 26.0,
-    img: salad,
-  },
-];
+//   {
+//     id: "m3",
+//     name: "Gelato",
+//     description: "Local flavors",
+//     price: 20.22,
+//     img: rice,
+//   },
+//   {
+//     id: "m4",
+//     name: "Salad",
+//     description: "Something Green",
+//     price: 26.0,
+//     img: salad,
+//   },
+// ];
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
@@ -62,7 +62,7 @@ const AvailableMeals = () => {
         key={meal.meal_id}
         id={meal.meal_id}
         title={meal.meal_title}
-        description={meal.meal_meal_descr}
+        description={meal.meal_descr}
         price={meal.meal_price}
         img={salad}
       />

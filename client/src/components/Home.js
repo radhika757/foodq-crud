@@ -13,6 +13,7 @@ const Home = () => {
 
     const [getuserdata, setUserdata] = useState([]);
     console.log(getuserdata);
+    console.log('hey');
 
     const { udata, setUdata } = useContext(adddata);
 
@@ -30,7 +31,7 @@ const Home = () => {
         });
 
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
 
         if (res.status === 422 || !data) {
             console.log("error ");
@@ -50,7 +51,7 @@ const Home = () => {
     }, [])
 
     const deleteuser = async (id) => {
-
+console.log(id);
         const res2 = await fetch(`/delete_meal/${id}`, {
             method: "DELETE",
             headers: {
@@ -60,7 +61,7 @@ const Home = () => {
 
         const deletedata = await res2.json();
         console.log(deletedata);
-
+console.log('del');
         if (res2.status === 422 || !deletedata) {
             console.log("error");
         } else {
@@ -131,6 +132,7 @@ const Home = () => {
                                     return (
                                         <>
                                             <tr>
+                                                {/* <th scope="row">{id + 1}</th> */}
                                                 <th scope="row">{id + 1}</th>
                                                 <td>{element.meal_title}</td>
                                                 <td>{element.meal_descr}</td>

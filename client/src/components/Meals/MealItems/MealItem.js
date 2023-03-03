@@ -9,7 +9,10 @@ const MealItem = (props) => {
   const cartCtx = useContext(CartContext);
 
   // this price will format the price we are fetching, only two decimat places and $ sign.
-  const price = `$${props.price.toFixed(2)}`;
+  const price = `$${props.price}`;
+//   console.log("price:",props.price)
+// console.log(price);
+// console.log('price');
 
   const addItemToCartHandler = (amount) => {
     cartCtx.addItem({
