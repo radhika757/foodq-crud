@@ -46,7 +46,7 @@ const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
 
   const getAllMeals = async () => {
-    await axios.get("http://localhost:3001/all-meals").then((res) => {
+    await axios.get("http://localhost:3001/famous_meals").then((res) => {
       console.log(res.data);
       setMeals(res.data);
     });

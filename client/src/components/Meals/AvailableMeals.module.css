@@ -7,12 +7,12 @@
   
   .meals ul {
     list-style: none;
-    margin: 0;
+    margin: 0.4em;
     padding: 0;
     display: flex;
     width: auto;
     position: absolute;
-    left: -200px;
+    left: -170px;
   }
 
   .order{

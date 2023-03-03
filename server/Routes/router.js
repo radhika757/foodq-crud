@@ -8,7 +8,7 @@ const LocalStrategy = require("passport-local").Strategy;
 //const logout = require("express-passport-logout");
 const jwt = require("jsonwebtoken");
 const JwtStrategy = require("passport-jwt").Strategy;
-const { ExtractJwt } = require("passport-jwt");
+const { ExtractJwt } = require("passport-jwt"); 
 
 router.get("/", (req, res) => {
   connection.query("SELECT * FROM meals", (err, result) => {
@@ -166,8 +166,8 @@ passport.use(
     async (email, password, done) => {
       try {
         // Query the database for the user with the given email
-        // console.log(email);
-        // console.log(password); 
+        console.log(email);
+        console.log(password); 
         await connection.execute(
           "SELECT * FROM admin_access WHERE admin_email = ?",
           [email],
@@ -181,8 +181,9 @@ passport.use(
           // console.log('user does not exist');
           //     return done(null, false); // req.flash is the way to set flashdata using connect-flash
           //   }
+         
             bcrypt.compare(password, rows[0].admin_pass, (err, match) => { 
-              // console.log(match);
+              console.log(match);
               if (!match) return done(null, false);
               return done(null, rows[0]);
             });
@@ -218,5 +219,16 @@ router.get("/getadmin", (req, res) => {
     }
   });
 });
+
+// Api for getting top 4 meals 
+router.get("/famous_meals",(req,res) =>{ 
+  connection.query("SELECT * FROM meals ORDER BY meal_famous DESC LIMIT 4",(err,result) =>{
+    if(err){
+      res.status(422).json("No data available");
+    }else{
+      res.status(201).json(result);
+    }
+  });
+})
 
 module.exports = router;
