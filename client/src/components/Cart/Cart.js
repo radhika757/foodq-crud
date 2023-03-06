@@ -7,6 +7,7 @@ import CartItem from "./CartItem";
 import Checkout from "./Checkout";
 import empty from "../../components/assets/emptyC.png";
 
+
 const Cart = (props) => {
   const [isCheckout, setIsCheckout] = useState(false);
 
@@ -82,7 +83,7 @@ const Cart = (props) => {
       )}
       {!isCheckout && modalActions}
       {/* Ex of props drilling  */}
-      {isCheckout && <Checkout onCancel={props.onClose} />}
+      {isCheckout && <Checkout onCancel={props.onClose} onClose={props.onClose}  />}
       {/* <div className={styles.actions}>
         <button className={styles["button--alt"]} onClick={props.onClose}>
           Close
