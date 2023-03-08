@@ -6,11 +6,10 @@ import { NavLink, useLocation } from "react-router-dom";
 import { adddata, deldata } from "./context/ContextProvider";
 import { updatedata } from "./context/ContextProvider";
 import Navbaar from "./Navbaar";
-import { Stack } from "@mui/material";
 
 const AdminHome = () => {
   const [getuserdata, setUserdata] = useState([]);
-
+  const [isAuthenticated, setIsAuthenticated] = useState(true);  //autentication should be initially false
   console.log("hey");
 
   const { udata, setUdata } = useContext(adddata);
@@ -19,21 +18,24 @@ const AdminHome = () => {
 
   const location = useLocation();
   const { state } = location;
-  let isAuthenticated = false;
+  // let isAuthenticated = false; 
+
   let user = [];
-  if (state !== undefined) {
-    isAuthenticated = true;
-    user.push(state.user);
-  }
-
-  console.log(getuserdata);
-  console.log(state);
-
-  //   if (backendAuthenticated) {
-  //     setIsAuthenticated(true);
-  //   } else {
-  //     setIsAuthenticated(false);
-  //   }
+  useEffect(()=>{
+    if (state !== undefined) {
+      isAuthenticated = true;
+      user.push(state.user);
+    }
+    console.log(getuserdata);
+    console.log(state);
+  console.log(isAuthenticated);
+    if (isAuthenticated) {
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
+  })
+  
   const getdata = async () => {
     const res = await fetch("http://localhost:3001/getdata", {
       method: "GET",
@@ -42,7 +44,7 @@ const AdminHome = () => {
       },
     });
 
-    const data = await res.json();
+    const data = await res.json(); 
     console.log(data);
 
     if (res.status === 422 || !data) {
@@ -140,7 +142,7 @@ const AdminHome = () => {
       )}
       {isAuthenticated && (
         <div className="mt-4">
-          <div className="container">
+          {/* <div className="container"> */}
             {user.map((user) => {
               return <h1>Hey {user.admin_name}</h1>;
             })}
@@ -156,9 +158,9 @@ const AdminHome = () => {
                   Admin
                 </NavLink>
                 {/* <div className="add_btn"> */}
-                  <NavLink to="/register" className="btn btn-outline-primary">
-                    Add a Meal
-                  </NavLink>
+                <NavLink to="/register" className="btn btn-outline-primary">
+                  Add a Meal
+                </NavLink>
                 {/* </div> */}
 
                 <table className="table">
@@ -185,7 +187,11 @@ const AdminHome = () => {
                             <td>{element.meal_avail}</td>
                             <td className="d-flex ">
                               {/* <NavLink to={`view/${element.id}`}> <button className="btn btn-light btn-sm"><RemoveRedEyeIcon /></button></NavLink> */}
-                              <NavLink to={`edit/${element.meal_id}`}><button className="btn btn-primary btn-sm m-2"><CreateIcon /></button></NavLink>
+                              <NavLink to={`edit/${element.meal_id}`}>
+                                <button className="btn btn-primary btn-sm m-2">
+                                  <CreateIcon />
+                                </button>
+                              </NavLink>
                               <button
                                 className="btn btn-danger btn-sm m-2"
                                 onClick={() => deleteuser(element.meal_id)}
@@ -201,7 +207,7 @@ const AdminHome = () => {
                 </table>
               </div>
             </div>
-          </div>
+          {/* </div> */}
         </div>
       )}
     </>

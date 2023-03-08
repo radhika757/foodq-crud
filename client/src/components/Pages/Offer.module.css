@@ -13,17 +13,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     /* transition: ease-in 2s; */
     animation: box-appear ease-out 3s;
-}
-
-body::after{
-content: "";
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-color: rgba(0,0,0,0.7);
-z-index: 999;
+   
 }
 
 .offercontent{
@@ -39,7 +29,7 @@ z-index: 999;
 }
 .signbtn{
     border: none;
-    padding: 5px 15px;
+    padding: 0px 15px;
     background-color: #000000;
     color: #ffffff;
     margin-right: 10px;
@@ -56,6 +46,7 @@ z-index: 999;
 .iconrow{
     display: flex;
    justify-content: center;
+   margin: 0.5em;
    /* height: 2.5em;
    width: 3em; */
 }

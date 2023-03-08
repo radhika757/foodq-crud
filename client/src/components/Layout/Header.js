@@ -10,8 +10,7 @@ const Header = (props) => {
     <>
       <header className={headerstyles.header}>
         <h1 style={{ ["paddingLeft"]: "50px" }}>Food-Q</h1>
-        {/* <Login /> */}
-        <NavLink to="/Admin">Login</NavLink>
+        <NavLink to="/login">Admin</NavLink>
         {/* We execute the showCartHandler()  */}
         <HeaderCart onClick={props.onShow} />
       </header>

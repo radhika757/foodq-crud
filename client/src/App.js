@@ -11,20 +11,20 @@ import User from "./components/User";
 import Admins from "./components/Admins";
 import LoginPage from "./components/LoginPage/LoginPage";
 import Home from "./components/Pages/Home";
-import Login from "./components/Layout/Login";
 
 function App() {
   return (
     <>
-    {/* <AdminHome/> */}
+      {/* <AdminHome/> */}
       <Switch>
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/Admin" component={Login} />
-        <Route exact path="/" component={AdminHome} />
+        <Route exact path="/" component={Home} />
+        {/* <Route exact path="/home" component={Home} /> */}
+        {/* <Route exact path="/Admin" component={Login} /> */}
+        <Route exact path="/AdminHome" component={AdminHome} />
         <Route path="/user" component={User} />
         <Route path="/admins" component={Admins} />
         <Route exact path="/register" component={Register} />
-
+        <Route path="/navbar" component={Navbaar} />
         <Route exact path="/edit/:id" component={Edit} />
         <Route exact path="/view/:id" component={Details} />
         <Route exact path="/login" component={LoginPage} />

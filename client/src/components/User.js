@@ -15,7 +15,7 @@ const User = () => {
   const submitData = async (e) => {
     console.log(adName); console.log(adPass); console.log(adEmail);
     e.preventDefault();
-    await Axios.post("http://localhost:3001/add_admin", {
+    await Axios.post("http://localhost:3001/add_admin", {  
       name: adName,
       pass: adPass,
       email: adEmail,
@@ -33,7 +33,7 @@ const User = () => {
         <div className="row d-flex justify-content-center">
           <div className="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
             {/* <NavLink to="/">Home</NavLink> */}
-            <h2>Register an Admin</h2>
+            <h2>Add a new Admin</h2>
          
             <form className="form-card mt-4" onSubmit={submitData}>
               <div className="row justify-content-between text-left m-4">

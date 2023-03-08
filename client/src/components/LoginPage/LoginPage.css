@@ -1,6 +1,64 @@
-.login-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+@import url("https://fonts.googleapis.com/css2?family=Sarabun&family=Shantell+Sans:wght@800&family=Sofia+Sans+Semi+Condensed&family=Source+Serif+Pro&display=swap");
 
+.logoname {
+    margin: 25px;
+  font-weight: bolder;
+font-size: xx-large;
+  font-family: "Sarabun", sans-serif;
+  font-family: "Shantell Sans", cursive;
+  /* font-family: "Sofia Sans Semi Condensed", sans-serif;
+  font-family: "Source Serif Pro", serif; */
+}
+
+.adminname {
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: center;
+}
+
+.login-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  /* background-color: rgba(0, 0, 0, 0.2); */
+  background-color: white;
+  border-radius: 15px;
+  padding: 35px 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 32em;
+  position: relative;
+  top: 5em;
+}
+
+.container input {
+  margin: 0;
+  padding: 15px 15px;
+}
+
+.background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background-image: url("../assets/cool-background.png");
+}
+
+.btnlogin {
+  /* display: flex;
+   justify-content: center; */
+  padding: 10px 10px;
+  width: 5em;
+  position: relative;
+  left: 9em;
+  margin-top: 1em;
+  background-color: #4d1601;
+  color: #ffffff;
+  font-weight: bold;
 }

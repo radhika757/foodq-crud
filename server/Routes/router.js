@@ -36,15 +36,6 @@ router.get("/getdata", (req, res) => {
 // new meal data
 router.post("/create", (req, res) => {
   const { meal_name, meal_descr, meal_price, meal_avail } = req.body; //obj destructuring.
-  // console.log(meal_name);
-  // let meal_id = "";
-  // const characters =
-  //   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-  // for (let i = 0; i < 6; i++) {
-  //   const randomIndex = Math.floor(Math.random() * characters.length);
-  //   meal_id += characters[randomIndex];
-  // }
   try {
     // console.log("in try loop");
     const dataInsert =
@@ -135,22 +126,33 @@ router.patch("/update_meal/:id", (req, res) => {
 // Admin access
 
 // register admin
-router.post("/add_admin", (req, res) => {
+router.post("/add_admin", (req, res) => { 
   const admin_name = req.body.name;
   const admin_email = req.body.email;
   const admin_pass = req.body.pass;
+
+  function generateHashPassword(admin_pass) {
+    const saltRounds = 8;
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = bcrypt.hashSync(admin_pass, salt); 
+    return hash;
+  }
+  //hashing the password 
+  const hashedPassword = generateHashPassword(admin_pass);
   const query_admin =
     "INSERT INTO admin_access (admin_name, admin_email, admin_pass) VALUES (?,?,?)";
   try {
     console.log(admin_name);
     console.log(admin_email);
     console.log(admin_pass);
+    console.log(hashedPassword);
     connection.query(
       query_admin,
-      [admin_name, admin_email, admin_pass],
-      (err, result) => {
+      [admin_name, admin_email, hashedPassword],
+      (err,result,res,req) => {
         if (err) throw err;
         console.log(result);
+        res.send(201).json('New Admin created');
       }
     );
   } catch (error) {
@@ -177,19 +179,18 @@ passport.use(
           "SELECT * FROM admin_access WHERE admin_email = ?",
           [email],
           (err, rows) => {
-            // console.log('loop 1');
-            // console.log(rows);
-            // console.log(rows[0].admin_pass);
-            // console.log(password);
-            // if (err) return done(err);
-            //   if (!rows.length) {
-            // console.log('user does not exist');
-            //     return done(null, false); // req.flash is the way to set flashdata using connect-flash
-            //   }
-
+            if (!rows.length) {
+              res.send("No match");
+              console.log("No match");
+              return done(null, false); // req.flash is the way to set flashdata using connect-flash
+            }
+            // hashing and comparing passwords
             bcrypt.compare(password, rows[0].admin_pass, (err, match) => {
-              console.log(match);
-              if (!match) return done(null, false);
+              if (!match) {
+                console.log(err);
+                console.log(match);
+                return done(null, false);
+              }
               return done(null, rows[0]);
             });
           }
@@ -236,7 +237,7 @@ router.get("/famous_meals", (req, res) => {
         res.status(201).json(result);
       }
     }
-  ); 
+  );
 });
 
 // order api
