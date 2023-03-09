@@ -148,15 +148,15 @@ const AdminHome = () => {
             })}
             <div className="row">
               <div className="col">
-                <NavLink
+                {/* <NavLink
                   to={{
-                    pathname: "/admins",
+                    pathname: "/AdminHome",
                     state: { isAuthenticated: true },
                   }}
                   className="btn btn-outline-primary "
                 >
                   Admin
-                </NavLink>
+                </NavLink> */}
                 {/* <div className="add_btn"> */}
                 <NavLink to="/register" className="btn btn-outline-primary">
                   Add a Meal

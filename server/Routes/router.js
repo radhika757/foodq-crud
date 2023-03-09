@@ -126,7 +126,7 @@ router.patch("/update_meal/:id", (req, res) => {
 // Admin access
 
 // register admin
-router.post("/add_admin", (req, res) => { 
+router.post("/add_admin", (req, res) => {
   const admin_name = req.body.name;
   const admin_email = req.body.email;
   const admin_pass = req.body.pass;
@@ -134,10 +134,10 @@ router.post("/add_admin", (req, res) => {
   function generateHashPassword(admin_pass) {
     const saltRounds = 8;
     const salt = bcrypt.genSaltSync(saltRounds);
-    const hash = bcrypt.hashSync(admin_pass, salt); 
+    const hash = bcrypt.hashSync(admin_pass, salt);
     return hash;
   }
-  //hashing the password 
+  //hashing the password
   const hashedPassword = generateHashPassword(admin_pass);
   const query_admin =
     "INSERT INTO admin_access (admin_name, admin_email, admin_pass) VALUES (?,?,?)";
@@ -149,10 +149,10 @@ router.post("/add_admin", (req, res) => {
     connection.query(
       query_admin,
       [admin_name, admin_email, hashedPassword],
-      (err,result,res,req) => {
+      (err, result, res, req) => {
         if (err) throw err;
         console.log(result);
-        res.send(201).json('New Admin created');
+        res.send(201).json("New Admin created");
       }
     );
   } catch (error) {
@@ -260,4 +260,29 @@ router.post("/create_order", (req, res) => {
   });
 });
 
+// new member api
+router.post("/new_member", (req, res) => { 
+  const memberName = req.body.name;
+  const number = req.body.num;
+  const mail = req.body.email; 
+  const address = req.body.add;
+  const reg_date = new Date(); 
+  // const con_date = reg_date.toLocaleDateString();
+  const formattedDate = reg_date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-');
+  console.log(reg_date, formattedDate);
+  const newRegister =
+    "INSERT INTO registers (m_name, m_num, m_mail, m_add, reg_date) VALUES (?,?,?,?,?)";
+  connection.query(
+    newRegister,
+    [memberName, number, mail, address, reg_date],
+    (err, result) => { 
+      if (err) {
+        res.status(422).json("Please try again");
+        console.log(err);
+      } else {
+        res.status(201).json(result);
+      }
+    }
+  );
+});
 module.exports = router;

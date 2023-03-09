@@ -7,6 +7,7 @@ import Meals from "../Meals/Meals";
 import SignUp from "../SignUp/SignUp";
 import Offer from "./Offer";
 import "./Home.css";
+import Features from "../UI/Features";
 
 const Home = (props) => {
   // state change for offer popup
@@ -50,6 +51,8 @@ const Home = (props) => {
         <main>
           <Meals />
         </main>
+        {/* Fetaures box */}
+        <Features/>
         <ChefBox />
         <SignUp />
       </CartProvider>

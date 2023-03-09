@@ -2,14 +2,14 @@
   position: absolute;
   /* border: 1px solid black; */
   right: 30px;
-  top: 61em;
+  top: 66em;
   padding: 40px;
-  height: 20em;
+  height: 15em;
   width: 44em;
 }
 
-.main-frame h2,
-h5 {
+.main-frame h3,
+h6 {
   position: relative;
   left: 15px;
 }
@@ -18,22 +18,41 @@ h5 {
 textarea {
   padding: 20px 20px;
   width: 35em;
-  margin: 10px;
+  margin: 5px;
   border: 1px solid gainsboro;
 }
 
 .main-frame button {
-  padding: 25px 20px;
-  width: 30em;
+  padding: 10px 5px;
+  width: 10em;
   background-color: #b94517;
   border: none;
   border-radius: 30px;
   color: #ffffff;
   font-weight: bold;
   cursor: pointer;
-  /* text-align: center; */
-  /* display: flex;
-   justify-content: center; */
+  display: flex;
+   justify-content: center;
   position: relative;
-  left: 60px;
+  left: 250px;
 }
+
+.my-sweet-alert {
+  background-color: #F7F7F7;
+  color: #333;
+}
+
+.my-sweet-alert-title {
+  color: #00BFFF;
+}
+
+.my-sweet-alert-button {
+  background-color: #00BFFF;
+  color: #FFF;
+}
+
+
+
+
+
+

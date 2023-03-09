@@ -2,9 +2,11 @@
   position: relative;
   top: 15em;
   width: 95%;
-  height: 100%;
+  height: 50em;
   padding: 0;
   /* border: 1px solid black; */
   border-radius: 20px;
   margin: 25px;
+  border: 1px solid white;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
