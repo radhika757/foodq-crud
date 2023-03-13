@@ -1,4 +1,4 @@
-
+@import url("https://fonts.googleapis.com/css2?family=Sarabun&family=Shantell+Sans:wght@800&family=Sofia+Sans+Semi+Condensed&family=Source+Serif+Pro&display=swap");
 .header {
   position: fixed;
   top: 0;
@@ -12,8 +12,13 @@
   align-items: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   z-index: 10;
+ 
 }
 
+.header h1{
+  font-family: "Sarabun", sans-serif;
+  font-family: "Shantell Sans", cursive;
+}
 
 
 .main-image {

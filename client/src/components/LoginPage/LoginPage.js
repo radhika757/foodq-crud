@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./LoginPage.css";
+import {Link} from 'react-router-dom';
 
 const LoginPage = () => {
   // console.log('hey');
@@ -42,7 +43,7 @@ const LoginPage = () => {
   return (
     <React.Fragment>
       <div className="background">
-        <h2 className="logoname">FoodQ</h2>
+        <Link to="/"><h2 className="logoname">FoodQ</h2></Link>
         <div className="container">
           <h2 className="adminname">Admin Login</h2>
 

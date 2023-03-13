@@ -6,15 +6,24 @@
     padding: 30px 30px;
     z-index: 1000;
     position: absolute;
-    left: 50%;
-    top: 50%;
+    left: 35%;
+    top: 30%;
     transform: translate(-50%, -50%);
     border-radius: 30px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    /* transition: ease-in 2s; */
-    animation: box-appear ease-out 3s;
+    animation: slide-in 0.5s forwards;
    
 }
+
+
+@keyframes slide-in {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0%);
+    }
+  }
 
 .offercontent{
     padding: 25px;
@@ -23,6 +32,10 @@
     /* justify-content: center; */
 }
 
+.offercontent h5{
+    text-align: center;
+    font-size: 2em;
+}
 .divbtns{
     display: flex;
     justify-content: center;

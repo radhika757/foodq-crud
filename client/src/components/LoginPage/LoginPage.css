@@ -1,11 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Sarabun&family=Shantell+Sans:wght@800&family=Sofia+Sans+Semi+Condensed&family=Source+Serif+Pro&display=swap");
 
 .logoname {
-    margin: 25px;
+  margin: 25px;
   font-weight: bolder;
-font-size: xx-large;
+  font-size: xx-large;
   font-family: "Sarabun", sans-serif;
   font-family: "Shantell Sans", cursive;
+  text-decoration: none;
+  color: #4d1601;
+  display: flex;
+  /* justify-content: center;
+   */
+  text-align: center;
   /* font-family: "Sofia Sans Semi Condensed", sans-serif;
   font-family: "Source Serif Pro", serif; */
 }

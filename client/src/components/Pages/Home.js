@@ -16,7 +16,7 @@ const Home = (props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setOfferPopup(true);
-    }, 3000); // popup after 3 secs
+    }, 2000); // popup after 3 secs
     return () => clearTimeout(timer);
   }, []);
 
