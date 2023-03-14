@@ -1,12 +1,16 @@
+*section-50{
+    padding: 50px 0;
+}
 
-.outline{
+.outline {
     /* border: 1px solid #DDA0DD; */
-    display: flex;
-    flex-grow: 4;
-    position: relative;
-    top: 14em;
+    /* display: flex;
+    flex-grow: 4; */
+    /* position: relative; */
+    /* top: 14em; */
     background-color: #E6E6FA;
-    height: 15em;
-    margin-top: 12em;
+    padding: 40px 0;
+    /* height: 15em; */
+    /* margin-top: 12em; */
 }
 

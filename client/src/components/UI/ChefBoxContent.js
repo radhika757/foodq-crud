@@ -6,8 +6,9 @@ const ChefBoxContent = () => {
   return (
     <React.Fragment>
       <div className={contentstyles.content}>
+        <div className={contentstyles.chef}>
         <img alt="chef-img" src={chefimg} />
-
+        </div>
         <div className={contentstyles.brief}>
           <h4>Head-Chef</h4>
           <h5>Gabriel</h5>

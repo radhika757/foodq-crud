@@ -72,7 +72,7 @@ const AvailableMeals = () => {
   //   console.log(mealsList);
   return (
     <section className={mealstyle.meals}>
-      <h3 className={mealstyle.order}>Our most ordered cuisine</h3>
+      <h3 className={mealstyle.order}><i>Our most ordered cuisine</i></h3>
       {/* <Card> */}
       <ul>{mealsList}</ul>
       {/* </Card> */}

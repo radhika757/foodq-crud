@@ -7,10 +7,9 @@ const SignUp = (props) => {
   return (
     <Fragment>
       <div className={styles.wrapper}>
-     <FoodInfo/>
-    
-        </div>
-        <SignUpForm/>
+        <FoodInfo />
+        <SignUpForm />
+      </div>
     </Fragment>
   );
 };

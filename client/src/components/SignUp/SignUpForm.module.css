@@ -1,23 +1,23 @@
 .main-frame {
-  position: absolute;
+  /* position: absolute; */
   /* border: 1px solid black; */
-  right: 30px;
-  top: 100em;
+  /* right: 30px; */
+  /* top: 100em; */
   padding: 40px;
-  height: 15em;
-  width: 44em;
+  /* height: 15em; */
+  width: 50%;
 }
 
 .main-frame h3,
 h6 {
-  position: relative;
+  /* position: relative; */
   left: 15px;
 }
 
 .main-frame input,
 textarea {
   padding: 20px 20px;
-  width: 35em;
+  width:100%;
   margin: 5px;
   border: 1px solid gainsboro;
 }
@@ -50,8 +50,22 @@ textarea {
   background-color: #00BFFF;
   color: #FFF;
 }
+/* 
+@media only screen and (max-width: 768px) {
+  .main-frame{
 
+  }
+}
 
+@media only screen and (max-width: 600px) {
+.main-frame input,
+textarea {
+
+}
+}
+
+@media only screen and (max-width: 992px){
+} */
 
 
 

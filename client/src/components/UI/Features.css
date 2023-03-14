@@ -1,44 +1,48 @@
+*section-50{
+    padding: 50px 0;
+}
+
 .main-box{
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     justify-content: end;
-    background-color: #ffffff;
+    background-color: #ffffff; */
     /* border: 1px solid black; */
-    border-radius: 15px;
+    /* border-radius: 15px;
     position: relative;
     top: 11em;
     left: 2em;
-    padding: 5px;
-    margin: 2em;
-    width: 80em;
-    height: 22em;
+    padding: 5px; */
+    margin: auto;
+    width: 90%;
+    /* height: 22em; */
     /* background-color: aliceblue; */
 }
 
-.collection{
-    display: flex;
-    margin: 0px;
-    position: relative;
-    top: -1em;
-    font-weight:light;
+.maintitle{
+    margin-bottom: 20px;
+    
 }
 
-.box-1{
+.col-box{
     /* border: 1px solid black; */
     border-radius: 10px;
     height: 14em;
-    width: 19em;
+    width: 23%;
+    /* float: left; */
+    display: inline-block;
+    margin: 0 10px;
 }
 
-.box-1 img{
+.col-box img{
     height: 22em;
-    width: 19em;
+    width: 100%;
     border-radius: 10px;
-    position: relative;
+    /* position: relative; */
     /* overflow: hidden; */
 }
 
-.box-1 img:hover {
+.col-box img:hover {
     transition: all 0.5s ease-out;
     box-shadow: 0px 10px 10px rgba(38, 38, 38, 0.2);
     top: -5px;
@@ -67,7 +71,7 @@
   } */
 
   
-.box-1 p{
+.col-box p{
     font-weight:light;
     top: -3em;
     color: #ffffff;
@@ -81,180 +85,8 @@
     left: 10px;
 }
 
-.box-2{
-    border-radius:25px;
-    height: 14em;
-    width: 10em;
-    position: absolute;
-    left: 14em;
-    top: 4em;
-}
-
-.box-2 img{
-    height: 22em;
-    width: 19em;
-    border-radius: 10px;
-    position: relative;
-}
-
-.box-3 img:hover {
-    transition: all 0.5s ease-out;
-    box-shadow: 0px 10px 10px rgba(38, 38, 38, 0.2);
-    top: -5px;
-    border: 1px solid #cccccc;
-    background-color: white;
-  }
-
-
-.box-2 p{
-    font-weight:light;
-    top: -3em;
-    color: #ffffff;
-    font-size: 22px;
-    /* font-weight: bold; */
-    display: flex;
-    flex-direction: column;
-    width: 15em;
-    margin: 0.2em;
-    position: relative;
-    left: 10px;
-}
-
-
-.box-3{
-    border-radius:25px;
-    height: 14em;
-    width: 10em;
-    position: absolute;
-    left: 20em;
-    /* top:; */
-}
-
-.box-3 img{
-    height: 22em;
-    width: 19em;
-    border-radius: 10px;
-}
-
-
-.box-3 p{
-    font-weight:light;
-    top: -3em;
-    color: #ffffff;
-    font-size: 22px;
-    /* font-weight: bold; */
-    display: flex;
-    flex-direction: column;
-    width: 15em;
-    margin: 0.2em;
-    position: relative;
-    left: 10px;
-}
-
-
-.box-4{
-    border-radius:25px;
-    height: 14em;
-    width: 10em;
-    position: absolute;
-    left: 39.6em;
-    /* top: 4em; */
-}
-
-.box-4 img{
-    height: 22em;
-    width: 19em;
-    border-radius: 10px; position: relative;
-}
-
-
-.box-4 img:hover {
-    transition: all 0.5s ease-out;
-    box-shadow: 0px 10px 10px rgba(38, 38, 38, 0.2);
-    top: -5px;
-    border: 1px solid #cccccc;
-    background-color: white;
-  }
-
-
-.box-4 p{
-    font-weight:light;
-    top: -3em;
-    color: #ffffff;
-    font-size: 22px;
-    display: flex;
-    flex-direction: column;
-    width: 15em;
-    margin: 0.2em;
-    position: relative;
-    left: 10px;
-}
-
-
-.box-5{
-    border-radius:25px;
-    height: 14em;
-    width: 10em;
-    position: absolute;
-    left: 59.5em;
-    /* top: 4em; */
-}
-
-.box-5 img{
-    height: 22em;
-    width: 19em;
-    border-radius: 10px; position: relative;
-}
-
-
-.box-5 img:hover {
-    transition: all 0.5s ease-out;
-    box-shadow: 0px 10px 10px rgba(38, 38, 38, 0.2);
-    top: -5px;
-    border: 1px solid #cccccc;
-    background-color: white;
-  }
-
-
-.box-5 p{
-    font-weight:light;
-    font-size: 22px;
-    top: -3em;
-    color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    width: 15em;
-    margin: 0.2em;
-    position: relative;
-    left: 10px;
-    
-}
-
-
-.box-6{
-    border-radius:25px;
-    height: 14em;
-    width: 10em;
-    position: absolute;
-    left: 66em;
-    top: 4em;
-}
-
-.box-6 img{
-    height: 22em;
-    width: 20em;
-    border-radius: 10px;
-}
-
-
-.box-6 p{
-    font-weight: light;
-    display: flex;
-    font-size: 22px;
-    flex-direction: column;
-    width: 15em;
-    margin: 0.2em;
-    position: relative;
-    left: 10px;
-    /* top: 2em; */
+@media screen and (max-width:767px){
+    .col-box{
+        width: 100%;
+    }
 }
