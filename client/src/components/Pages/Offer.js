@@ -1,25 +1,19 @@
-import  { useState } from "react";
+import  { useState, useRef } from "react";
 import offerstyles from "./Offer.module.css";
 import wave from "../assets/002-goodbye.png";
 import bomb from "../assets/001-bomb.png";
 import fire from "../assets/003-fire.png";
-// import Popup from "react-animated-popup";
+
 
 const Offer = (props) => {
   const [showOfferPopup, setShowOfferPopup] = useState(true);
-
-  // if(!showOfferPopup){
-  //   document.body.style.background = 'rgba(0,0,0,1)';
-  // }
+  
 
   function closeOfferOverlay() {
-    setShowOfferPopup(false);
-
+      console.log(props.onSignup);
+        // setShowOfferPopup(false);
   }
-
-
   return (
-    // <Popup>
     <>
     {showOfferPopup && 
         (<div className={offerstyles.offerbox}>

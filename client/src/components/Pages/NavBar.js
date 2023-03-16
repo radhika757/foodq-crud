@@ -5,9 +5,7 @@ import "./NavBar.css";
 
 const NavBar = () => {
   return (
-    <>
-      {/* <Link to="/Admin"> Login </Link> */}
-      
+    <>     
      
     </>
   );

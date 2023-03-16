@@ -1,69 +1,82 @@
-.offerbox{
-    background-color: white;
-    /* border: 1px solid black; */
-    width: 25em;
-    height: 20em;
-    padding: 30px 30px;
-    z-index: 1000;
-    position: absolute;
-    left: 35%;
-    top: 30%;
-    transform: translate(-50%, -50%);
-    border-radius: 30px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    animation: slide-in 0.5s forwards;
-   
+.offerbox {
+  background-color: white;
+  width: 25em;
+  height: 20em;
+  padding: 30px 30px;
+  z-index: 1000;
+  position: absolute;
+  left: 35%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  border-radius: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  animation: slide-in 0.5s forwards;
 }
-
 
 @keyframes slide-in {
-    0% {
-      transform: translateY(-100%);
-    }
-    100% {
-      transform: translateY(0%);
-    }
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+.offercontent {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.offercontent h5 {
+  text-align: center;
+  font-size: 2em;
+}
+.divbtns {
+  display: flex;
+  justify-content: center;
+}
+.signbtn {
+  border: none;
+  padding: 0px 15px;
+  background-color: #000000;
+  color: #ffffff;
+  margin-right: 10px;
+}
+
+.nextime {
+  border: none;
+  padding: 15px 15px;
+  background-color: whitesmoke;
+  color: #000000;
+}
+
+.iconrow {
+  display: flex;
+  justify-content: center;
+  margin: 0.5em;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .offerbox {
+    width: 20em;
+    height: 18em;
+    padding: 10px 10px;
+    left: 8%;
+    top: 30%;
   }
 
-.offercontent{
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-}
-
-.offercontent h5{
-    text-align: center;
-    font-size: 2em;
-}
-.divbtns{
-    display: flex;
-    justify-content: center;
-}
-.signbtn{
-    border: none;
-    padding: 0px 15px;
-    background-color: #000000;
-    color: #ffffff;
-    margin-right: 10px;
-
-}
-
-.nextime{
-    border: none;
-    padding: 15px 15px;
-    background-color: whitesmoke;
-    color: #000000;
-}
-
-.iconrow{
-    display: flex;
-   justify-content: center;
-   margin: 0.5em;
-   /* height: 2.5em;
-   width: 3em; */
-}
-
-.icon{
-    margin-right: 10px;
+  .offercontent h5{
+    font-size: 1.5em;
+  }
+  .signbtn{
+    padding: 0px 10px;
+  }
+  .nextime{
+    padding: 10px 10px;
+  }
 }

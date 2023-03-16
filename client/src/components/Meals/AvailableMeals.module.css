@@ -1,21 +1,16 @@
 .meals {
-    /* max-width: 60rem; */
-    width: 110%;
+   
+    width: 100%;
     height: fit-content;
     margin: 1rem auto;
-    /* display: flex; */
     animation: meals-appear 1s ease-out forwards;
   }
   
   .meals ul {
-    /* list-style: none;
-    margin: 0.4em;
-    padding: 0; */
     display: flex;
     flex-wrap: wrap;
-    /* width: auto;
-    position: absolute;
-    left: -170px; */
+    margin: 2
+    em; 
   }
 .meals img{
   width: 100%;
@@ -37,4 +32,19 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .meals ul{
+      margin: 0 1em;
+    }
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .meals ul{
+      margin: 0 1em;
+    }
+  }
+  
+  @media only screen and (max-width: 992px){
   }

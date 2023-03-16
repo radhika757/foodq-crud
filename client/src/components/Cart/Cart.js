@@ -98,13 +98,6 @@ console.log(hasItems);
       {isCheckout && (
         <Checkout onCancel={props.onClose} onClose={props.onClose} />
       )}
-      {/* <div className={styles.actions}>
-        <button className={styles["button--alt"]} onClick={props.onClose}>
-          Close
-        </button> */}
-      {/* Order btn should only show up when there are items in cart. */}
-      {/* {hasItems && <button className={styles.button}>Order</button>}
-      </div> */}
     </Modal>
   );
 };

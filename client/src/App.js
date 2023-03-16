@@ -18,8 +18,6 @@ function App() {
       {/* <AdminHome/> */}
       <Switch>
         <Route exact path="/" component={Home} />
-        {/* <Route exact path="/home" component={Home} /> */}
-        {/* <Route exact path="/Admin" component={Login} /> */}
         <Route exact path="/AdminHome" component={AdminHome} />
         <Route path="/user" component={User} />
         <Route path="/admins" component={Admins} />

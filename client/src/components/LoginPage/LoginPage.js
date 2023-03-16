@@ -6,7 +6,7 @@ import "./LoginPage.css";
 import {Link} from 'react-router-dom';
 
 const LoginPage = () => {
-  // console.log('hey');
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();

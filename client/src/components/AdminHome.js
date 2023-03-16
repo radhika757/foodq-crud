@@ -148,20 +148,11 @@ const AdminHome = () => {
             })}
             <div className="row">
               <div className="col">
-                {/* <NavLink
-                  to={{
-                    pathname: "/AdminHome",
-                    state: { isAuthenticated: true },
-                  }}
-                  className="btn btn-outline-primary "
-                >
-                  Admin
-                </NavLink> */}
-                {/* <div className="add_btn"> */}
+                
                 <NavLink to="/register" className="btn btn-outline-primary">
                   Add a Meal
                 </NavLink>
-                {/* </div> */}
+               
 
                 <table className="table">
                   <thead>
@@ -180,13 +171,13 @@ const AdminHome = () => {
                         <>
                           <tr>
                             <th scope="row">{id + 1}</th>
-                            {/* <th scope="row">{element.meal_id}</th> */}
+                           
                             <td>{element.meal_title}</td>
                             <td>{element.meal_descr}</td>
                             <td> $ {element.meal_price} </td>
                             <td>{element.meal_avail}</td>
                             <td className="d-flex ">
-                              {/* <NavLink to={`view/${element.id}`}> <button className="btn btn-light btn-sm"><RemoveRedEyeIcon /></button></NavLink> */}
+                              
                               <NavLink to={`edit/${element.meal_id}`}>
                                 <button className="btn btn-primary btn-sm m-2">
                                   <CreateIcon />
@@ -207,7 +198,7 @@ const AdminHome = () => {
                 </table>
               </div>
             </div>
-          {/* </div> */}
+          
         </div>
       )}
     </>

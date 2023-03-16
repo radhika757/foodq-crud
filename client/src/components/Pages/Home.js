@@ -8,6 +8,7 @@ import SignUp from "../SignUp/SignUp";
 import Offer from "./Offer";
 import "./Home.css";
 import Features from "../UI/Features";
+import Footer from '../Layout/Footer';
 
 const Home = (props) => {
   // state change for offer popup
@@ -27,6 +28,11 @@ const Home = (props) => {
     popbody.classList.remove("popupbackg");
   };
 
+  const handleSignUpPopup = () =>{
+    
+    console.log('hey');
+  }
+
   const [cartShow, setCartShow] = useState(false);
   //  function that should be called when close btn / backdrop is clicked
   const showCartHandler = () => {
@@ -40,14 +46,12 @@ const Home = (props) => {
   return (
     <React.Fragment>
       <div className="popupbackg">
-        {showOfferPopup && <Offer onClick={handleOfferPopup} />}
+        {showOfferPopup && <Offer onClick={handleOfferPopup} onSignup={handleSignUpPopup()} />}
       </div>
       <CartProvider>
-        {/* Rendering Cart component conditionally. */}
         {cartShow && <Cart onClose={hideCartHandler} />}
-        {/* to call the showCart() we pass a pointer to the function [props that hold function / like custom events] */}
         <Header onShow={showCartHandler} />
-        {/* we dont execute it ()  just point at it. */}
+      
         <main>
           <Meals />
         </main>
@@ -55,6 +59,7 @@ const Home = (props) => {
         <Features/>
         <ChefBox />
         <SignUp />
+        <Footer/>
       </CartProvider>
     </React.Fragment>
   );

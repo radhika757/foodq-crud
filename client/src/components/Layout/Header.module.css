@@ -35,13 +35,16 @@
   transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
 }
 
+.headerright{
+  display: flex;
+}
 a {
   cursor: pointer;
   text-decoration: none;
   font: inherit;
   border: none;
-  position: relative;
-  left: 27em;
+  /* position: relative;
+  left: 27em; */
   color: white;
   padding: 0.65rem 1.5rem;
   display: flex; 
@@ -52,6 +55,13 @@ a {
   /* transition: linear 0.1s; */
 }
 
-/* a:hover {
-  font-size: 1em;
-} */
+@media only screen and  (max-width:768px){
+  .header{
+    width: 85%;
+  }
+
+  .headerright{
+    text-align: center;
+  }
+  
+}

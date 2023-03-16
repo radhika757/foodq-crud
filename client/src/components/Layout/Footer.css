@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Sarabun&family=Shantell+Sans:wght@800&family=Sofia+Sans+Semi+Condensed&family=Source+Serif+Pro&display=swap");
+
+.footer-wrap {
+  width: 100%;
+  height: auto;
+  background-color: #000000;
+  color: ghostwhite;
+  padding: 25px 20px;
+}
+
+.footer-logo {
+  font-family: "Sarabun", sans-serif;
+  font-family: "Shantell Sans", cursive;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 2em;
+  /* margin-left: 1em; */
+  font-weight: bold;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: stretch;
+  width: 85%;
+  margin: 0 80px;
+  border-bottom: 1px solid gainsboro;
+  font-size: 20px;
+}
+
+.footer-content-1 {
+  text-align: left;
+  /* border-left: 1px solid gainsboro; */
+  /* padding: 0 15px; */
+}
+
+.footer-content-1 ul {
+  list-style: none;
+}
+
+.footer-content-2 {
+  text-align: center;
+  padding: 0 50px;
+}
+
+.footer-content-2 ul {
+  list-style: none;
+}
+
+.footer-content-3 {
+  text-align: right;
+  /* border-right: 1px solid gainsboro; */
+}
+
+.footer-content-3 ul {
+  list-style-type: none;
+}
+
+.footer-developer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+}
+
+.footer-developer a {
+  text-decoration: none;
+  position: inherit;
+}

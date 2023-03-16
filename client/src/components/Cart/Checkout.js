@@ -1,8 +1,6 @@
 import React, { useRef, useState } from "react";
 import checkstyle from "./Checkout.module.css";
 import Axios from "axios";
-// const isEmpty = (value) => value.trim() == "";
-// const isNotFiveChars = (value) => value.trim().length !== 5;
 
 const Checkout = (props) => {
   const [showOrderPopup, setOrderShowPopup] = useState(false);
@@ -19,9 +17,7 @@ const Checkout = (props) => {
     console.log(username);
     console.log(useradd);
     console.log(usernum);
-    // if(username === ''){
-
-    // }
+   
     event.preventDefault();
 
     Axios.post("http://localhost:3001/create_order", {
@@ -29,11 +25,7 @@ const Checkout = (props) => {
       client_add: useradd,
       client_num: usernum,
     });
-    // const data = await res.json();
-    // if(res.status == '422'){
-
-    // }
-    // alert("Order placed");
+    
 
     setTimeout(() => {
       setOrderShowPopup(true);
@@ -41,15 +33,13 @@ const Checkout = (props) => {
 
   };
 
-  // const handlePopUpClose = () => {
-  //   setOrderShowPopup(false);
-  // };
+  
 
   return (
     <>
       <form onSubmit={orderHandler} className={checkstyle.form} method="POST">
         <div className={checkstyle.control}>
-          {/* <label htmlFor="name">Your Name</label> */}
+        
           <input
             type="text"
             name="client_name"
@@ -60,7 +50,7 @@ const Checkout = (props) => {
           />
         </div>
         <div className={checkstyle.control}>
-          {/* <label htmlFor="address">Address</label> */}
+        
           <input
             type="text"
             name="client_add"
@@ -71,7 +61,7 @@ const Checkout = (props) => {
           />
         </div>
         <div className={checkstyle.control}>
-          {/* <label htmlFor="number">Phone number</label> */}
+       
           <input
             type="number"
             name="client_num"

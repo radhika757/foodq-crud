@@ -69,13 +69,11 @@ const AvailableMeals = () => {
     )
     // returning a JSX element which represents this meal item.
   );
-  //   console.log(mealsList);
+ 
   return (
     <section className={mealstyle.meals}>
       <h3 className={mealstyle.order}><i>Our most ordered cuisine</i></h3>
-      {/* <Card> */}
-      <ul>{mealsList}</ul>
-      {/* </Card> */}
+      <ul>{mealsList}</ul> 
     </section>
   );
 };

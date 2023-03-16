@@ -8,12 +8,24 @@
 }
 
 @media only screen and (max-width: 768px) {
+  .backg{
+    width: 0;
+  }
+  
   .backg img {
     display: none;
+    width: 0px;
   }
 }
 
 @media only screen and (max-width: 600px) {
+  .backg{
+    width: 0;
+  }
+  .backg img {
+    display: none;
+    width: 0px;
+  }
 }
 
 @media only screen and (max-width: 992px) {

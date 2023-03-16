@@ -43,7 +43,7 @@ const SignUpForm = (props) => {
   return (
     <Fragment>
       <div className={formstyles["main-frame"]}>
-        <h3>|Register yourself</h3>
+        <h3>Become a member</h3>
         <h6>
           <span style={{ color: "#b94517" }}>Unlock coupons worth 500* </span>
         </h6>
@@ -87,7 +87,6 @@ const SignUpForm = (props) => {
                 setMemberAddress(e.target.value);
               }}
             />
-            {/* <h5 style={{ color: "#4B9CD3" }} className={formstyles.reff}>Have a referral code?</h5> */}
           </div>
           <button>Submit</button>
         </form>
