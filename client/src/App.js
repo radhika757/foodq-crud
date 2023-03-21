@@ -11,6 +11,8 @@ import User from "./components/User";
 import Admins from "./components/Admins";
 import LoginPage from "./components/LoginPage/LoginPage";
 import Home from "./components/Pages/Home";
+import Orders from "./components/Orders";
+import Subscription from "./components/Subscription";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
         <Route path="/user" component={User} />
         <Route path="/admins" component={Admins} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/orders" component={Orders}/>
+        <Route exact path="/subscription" component={Subscription}/>
         <Route path="/navbar" component={Navbaar} />
         <Route exact path="/edit/:id" component={Edit} />
         <Route exact path="/view/:id" component={Details} />

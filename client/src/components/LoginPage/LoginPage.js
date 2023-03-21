@@ -28,7 +28,7 @@ const LoginPage = () => {
 
         if (res.data.isAuthenticated) {
           history.push({
-            pathname: "/admins",
+            pathname: "/AdminHome",
             state: { user: userData, isAuthenticated },
           });
         }

@@ -1,50 +1,70 @@
 .meals {
-   
-    width: 100%;
-    height: fit-content;
-    margin: 1rem auto;
-    animation: meals-appear 1s ease-out forwards;
-  }
-  
-  .meals ul {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 2
-    em; 
-  }
-.meals img{
+  width: 100%;
+  height: fit-content;
+  margin: 1rem auto;
+  animation: meals-appear 1s ease-out forwards;
+}
+
+.meals ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2em;
+}
+.meals img {
   width: 100%;
 }
-  .order{
-    margin-top: 2em;
-    display: flex;
-    justify-content: center;
-    font-size: x-large;
-  }
- 
-  @keyframes meals-appear {
-    from {
-      opacity: 0;
-      transform: translateY(3rem);
-    }
-  
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+.order {
+  margin-top: 2em;
+  display: flex;
+  justify-content: center;
+  font-size: x-large;
+}
+
+@keyframes meals-appear {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
   }
 
-  @media only screen and (max-width: 768px) {
-    .meals ul{
-      margin: 0 1em;
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  @media only screen and (max-width: 600px) {
-    .meals ul{
-      margin: 0 1em;
-    }
+}
+
+/* Main menu */
+.allmenu {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  margin: 2em 4em;
+}
+
+.border {
+  border-bottom: 1px solid #e9e9eb;
+  width: 90%;
+  margin: 0.75em 0;
+}
+
+.card-border{
+  display: flex;
+  border: 1px solid black;
+  padding: 15px 10px;
+  flex-wrap: wrap;
+  width: 90%;
+}
+
+@media only screen and (max-width: 768px) {
+  .meals ul {
+    margin: 0 1em;
   }
-  
-  @media only screen and (max-width: 992px){
+}
+
+@media only screen and (max-width: 600px) {
+  .meals ul {
+    margin: 0 1em;
   }
+}
+
+@media only screen and (max-width: 992px) {
+}

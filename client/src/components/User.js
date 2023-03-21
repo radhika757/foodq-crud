@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { NavLink, useHistory } from "react-router-dom";
+import Navbaar from "./Navbaar";
+import  Sidenav from "./Sidenav";
 
 const User = () => {
   const [adName, setAdName] = useState("");
@@ -28,11 +30,13 @@ const User = () => {
   };
   return (
     <>
-      <div><NavLink to="/admins">Admin</NavLink></div>
+      <Navbaar/>
+      <div className="d-flex">
+      <Sidenav />
       <div className="container-fluid px-1 py-5 mx-auto">
         <div className="row d-flex justify-content-center">
           <div className="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-            {/* <NavLink to="/">Home</NavLink> */}
+          
             <h2>Add a new Admin</h2>
          
             <form className="form-card mt-4" onSubmit={submitData}>
@@ -119,6 +123,7 @@ const User = () => {
             </form>
           </div>
         </div>
+      </div>
       </div>
     </>
   );

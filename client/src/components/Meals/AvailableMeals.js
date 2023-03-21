@@ -8,54 +8,28 @@ import rice from "../assets/gelato.jpg";
 import schnit from "../assets/schnitzel.jpg";
 import salad from "../assets/salad.jpg";
 import axios from "axios";
-// an array of dummy meals ( we can fetch this from a database)
-// const dummy_meals = [
-//   {
-//     id: "m1",
-//     name: "Lasagne",
-//     description: "Creamy Pasta",
-//     price: 22.9,
-//     img: sushi,
-//   },
-
-//   {
-//     id: "m2",
-//     name: "Brodetto",
-//     description: "Fish soup",
-//     price: 33.3,
-//     img: schnit,
-//   },
-
-//   {
-//     id: "m3",
-//     name: "Gelato",
-//     description: "Local flavors",
-//     price: 20.22,
-//     img: rice,
-//   },
-//   {
-//     id: "m4",
-//     name: "Salad",
-//     description: "Something Green",
-//     price: 26.0,
-//     img: salad,
-//   },
-// ];
+// an array of dummy meals (fetch this from a database)
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
+  const [allMeals, setAllMeals] = useState([]);
 
-  const getAllMeals = async () => {
+  // const getAllMeals = async
+  const getMeals = async () => {
     await axios.get("http://localhost:3001/famous_meals").then((res) => {
       console.log(res.data);
       setMeals(res.data);
     });
+    await axios.get("http://localhost:3001/getdata").then((res1) => {
+      console.log(res1.data);
+      setAllMeals(res1.data);
+    });
   };
   useEffect(() => {
-    getAllMeals();
+    getMeals();
   }, []);
 
-  const mealsList = meals.map(
+  const favList = meals.map(
     (meal) => (
       // map all the meals by passing function to map which is executed for every meal
       <MealItem
@@ -69,12 +43,37 @@ const AvailableMeals = () => {
     )
     // returning a JSX element which represents this meal item.
   );
- 
+
+  const allMealList = allMeals.map((showAllMeals) => (
+    <MealItem
+        key={showAllMeals.meal_id}
+        id={showAllMeals.meal_id}
+        title={showAllMeals.meal_title}
+        description={showAllMeals.meal_descr}
+        price={showAllMeals.meal_price}
+        img={salad}
+      />
+  ))
   return (
-    <section className={mealstyle.meals}>
-      <h3 className={mealstyle.order}><i>Our most ordered cuisine</i></h3>
-      <ul>{mealsList}</ul> 
-    </section>
+    <>
+      <section className={mealstyle.meals}>
+        <h3 className={mealstyle.order}>
+          <i>Our most ordered cuisine</i>
+        </h3>
+        <ul>{favList}</ul>
+      </section>
+      <div className={mealstyle.allmenu}>
+        <h2>
+          <b>120 Dishes</b>
+          
+        </h2>
+        {/* <h2>Veg/Non-veg</h2> */}
+        <span className={mealstyle.border}></span>
+        <div className={mealstyle['card-border']}>
+         {allMealList}
+        </div>
+      </div>
+    </>
   );
 };
 

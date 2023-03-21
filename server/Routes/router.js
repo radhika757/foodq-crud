@@ -260,22 +260,45 @@ router.post("/create_order", (req, res) => {
   });
 });
 
+// get orders
+router.get("/get_order", (req, res) => {
+  connection.query(
+    "SELECT * FROM orders ORDER BY order_id DESC",
+    (err, result) => {
+      console.log("loop+");
+      if (err) {
+        console.log("if");
+        res.status(422).json("No orders available");
+        console.log(err);
+      } else {
+        console.log("else");
+        res.status(201).json(result);
+      }
+    }
+  );
+});
 // new member api
-router.post("/new_member", (req, res) => { 
+router.post("/new_member", (req, res) => {
   const memberName = req.body.name;
   const number = req.body.num;
-  const mail = req.body.email; 
+  const mail = req.body.email;
   const address = req.body.add;
-  const reg_date = new Date(); 
+  const reg_date = new Date();
   // const con_date = reg_date.toLocaleDateString();
-  const formattedDate = reg_date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-');
+  const formattedDate = reg_date
+    .toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    })
+    .replace(/\//g, "-");
   console.log(reg_date, formattedDate);
   const newRegister =
     "INSERT INTO registers (m_name, m_num, m_mail, m_add, reg_date) VALUES (?,?,?,?,?)";
   connection.query(
     newRegister,
     [memberName, number, mail, address, reg_date],
-    (err, result) => { 
+    (err, result) => {
       if (err) {
         res.status(422).json("Please try again");
         console.log(err);
@@ -285,4 +308,20 @@ router.post("/new_member", (req, res) => {
     }
   );
 });
+
+// get memebers api
+router.get("/all_subscriptions", (req, res) => {  
+  connection.query(
+    "SELECT * FROM registers ORDER BY member_id DESC",
+    (err, result) => {
+      if (err) {
+        res.status(422).json("No records available");
+        console.log(err);
+      } else {
+        res.status(201).json(result);
+      }
+    }
+  );
+});
+
 module.exports = router;

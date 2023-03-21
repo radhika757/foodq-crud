@@ -33,12 +33,12 @@ const Navbaar = () => {
   };
   return (
     <React.Fragment>
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark" className="d-flex justify-content-center p-3">
       
-          <Navbar.Brand href="Dashboard" className="me-5">Dashboard</Navbar.Brand>
+          <Navbar.Brand href="/" className="me-5">FoodQ</Navbar.Brand>
           <Nav className="me-auto ">
             <Nav.Link href="AdminHome" className="ms-5">Meals</Nav.Link>
-            <Nav.Link href="user" className="">Admin</Nav.Link>
+            <Nav.Link href="admins" className="">Admin</Nav.Link>
             <Nav.Link href="orders" className="">Orders</Nav.Link>
             <Nav.Link href="subscription" className="">Registers</Nav.Link>
             <Nav.Link href="" className="">Logout</Nav.Link>

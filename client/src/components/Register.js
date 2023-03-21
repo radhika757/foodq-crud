@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { adddata } from "./context/ContextProvider";
+import Navbaar from "./Navbaar";
 import "./Register.css";
+import Sidenav from "./Sidenav";
 
 const Register = () => {
   const { udata, setUdata } = useContext(adddata);
@@ -61,11 +63,15 @@ const Register = () => {
   };
 
   return (
-    <div className="container-fluid px-1 py-5 mx-auto">
-      <div className="row d-flex justify-content-center">
+    <>
+    <Navbaar/>
+    <div className="d-flex">
+    <Sidenav/>
+    <div className="container-fluid py-5">
+      <div className="row d-flex justify-content-center" style={{width:"70em"}}>
         <div className="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-          {/* <NavLink to="/">Home</NavLink> */}
-          <h2>Enter a new dish</h2>
+    
+          <h2 className="text-uppercase m-2">Enter a new dish</h2>
           <form className="form-card mt-4" encType="multipart/form-data" method="POST">
             <div className="row justify-content-between text-left m-4">
               <div className="form-group col-sm-6 flex-column d-flex">
@@ -162,7 +168,9 @@ const Register = () => {
           </form>
         </div>
       </div>
+      </div>
     </div>
+    </>
   );
 };
 export default Register;

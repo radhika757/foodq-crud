@@ -6,6 +6,8 @@ import { NavLink, useLocation } from "react-router-dom";
 import { adddata, deldata } from "./context/ContextProvider";
 import { updatedata } from "./context/ContextProvider";
 import Navbaar from "./Navbaar";
+import Sidenav from "./Sidenav";
+import { Table } from "react-bootstrap";
 
 const AdminHome = () => {
   const [getuserdata, setUserdata] = useState([]);
@@ -23,7 +25,7 @@ const AdminHome = () => {
   let user = [];
   useEffect(()=>{
     if (state !== undefined) {
-      isAuthenticated = true;
+      // isAuthenticated = true;
       user.push(state.user);
     }
     console.log(getuserdata);
@@ -85,6 +87,8 @@ const AdminHome = () => {
   return (
     <>
       <Navbaar />
+      <div className="d-flex">
+      <Sidenav/>
       {udata ? (
         <>
           <div
@@ -149,14 +153,14 @@ const AdminHome = () => {
             <div className="row">
               <div className="col">
                 
-                <NavLink to="/register" className="btn btn-outline-primary">
+                {/* <NavLink to="/register" className="btn btn-outline-primary">
                   Add a Meal
-                </NavLink>
+                </NavLink> */}
                
 
-                <table className="table">
+                <Table  striped bordered hover style={{width:'70em'}} className="table m-4">
                   <thead>
-                    <tr className="table-dark">
+                    <tr>
                       <th scope="col">id</th>
                       <th scope="col">Meal Name</th>
                       <th scope="col">Meal Description</th>
@@ -176,7 +180,7 @@ const AdminHome = () => {
                             <td>{element.meal_descr}</td>
                             <td> $ {element.meal_price} </td>
                             <td>{element.meal_avail}</td>
-                            <td className="d-flex ">
+                            <td className="d-flex justify-content-left">
                               
                               <NavLink to={`edit/${element.meal_id}`}>
                                 <button className="btn btn-primary btn-sm m-2">
@@ -195,12 +199,13 @@ const AdminHome = () => {
                       );
                     })}
                   </tbody>
-                </table>
+                </Table>
               </div>
             </div>
           
         </div>
       )}
+      </div>
     </>
   );
 };
