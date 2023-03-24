@@ -6,20 +6,40 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Sidenav from "./Sidenav";
 import { Table } from "react-bootstrap";
 
-
-  
 const Orders = () => {
   const [getOrders, setGetOrders] = useState([]);
+  
+
+  const deleteOrder = async (id) => {
+    const res2 = await fetch(`http://localhost:3001/delete_order/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const deletedata = await res2.json();
+    
+    console.log(deletedata);
+    setGetOrders(getOrders);
+    if (res2.status === 422 || !deletedata) {
+      console.log("error");
+    } else {
+      console.log("user deleted");
+    }
+  };
 
   const getAllOrders = async () => {
     // console.log('callked');
     await axios.get("http://localhost:3001/get_order").then((res) => {
       console.log(res.data);
       setGetOrders(res.data);
+      // setGetOrders(getOrders);
     });
   };
   useEffect(() => {
     getAllOrders();
+   
   }, []);
 
   return (
@@ -29,7 +49,13 @@ const Orders = () => {
         <Sidenav />
         <div>
           <h2 className="text-center m-4">Orders</h2>
-          <Table striped bordered hover style={{width:'70em'}} className="table m-4">
+          <Table
+            striped
+            bordered
+            hover
+            style={{ width: "70em" }}
+            className="table m-4"
+          >
             <thead>
               <tr>
                 <th scope="col">Id</th>
@@ -61,7 +87,7 @@ const Orders = () => {
                               </NavLink> */}
                         <button
                           className="btn btn-danger btn-sm p-2"
-                          // onClick={() => deleteuser(element.meal_id)}
+                          onClick={() => deleteOrder(element.order_id)}
                         >
                           <DeleteOutlineIcon />
                         </button>

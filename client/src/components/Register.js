@@ -5,6 +5,7 @@ import Navbaar from "./Navbaar";
 import "./Register.css";
 import Sidenav from "./Sidenav";
 
+
 const Register = () => {
   const { udata, setUdata } = useContext(adddata);
 
@@ -15,8 +16,10 @@ const Register = () => {
     meal_descr: "",
     meal_price: 0,
     meal_avail: "",
+    meal_time:0,
+    meal_rate:0
   });
-  // console.log(inpval);
+  console.log(inpval);
   const setdata = (e) => {
     // console.log(e.target.value);
     const { name, value } = e.target;
@@ -31,7 +34,7 @@ const Register = () => {
   const addinpdata = async (e) => {
     e.preventDefault();
 
-    const { meal_name, meal_descr, meal_price, meal_avail } = inpval;
+    const { meal_name, meal_descr, meal_price, meal_avail, meal_time,meal_rate } = inpval;
     // console.log(inpval);
 
     const res = await fetch("http://localhost:3001/create", {
@@ -45,6 +48,8 @@ const Register = () => {
         meal_descr,
         meal_price,
         meal_avail,
+        meal_time,
+        meal_rate
       }),
     });
 
@@ -55,7 +60,7 @@ const Register = () => {
       console.log("error ");
       alert("error");
     } else {
-      history.push("/");
+      history.push("/AdminHome");
       setUdata(data);
       console.log("Meal added");
     }
@@ -64,14 +69,14 @@ const Register = () => {
 
   return (
     <>
-    <Navbaar/>
-    <div className="d-flex">
-    <Sidenav/>
-    <div className="container-fluid py-5">
+      <Navbaar />
+      <div className="d-flex">
+        <Sidenav /> 
+        <div className="container-fluid py-5">
       <div className="row d-flex justify-content-center" style={{width:"70em"}}>
         <div className="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
     
-          <h2 className="text-uppercase m-2">Enter a new dish</h2>
+          <h2 className="text-uppercase m-2 title">Enter a new dish</h2>
           <form className="form-card mt-4" encType="multipart/form-data" method="POST">
             <div className="row justify-content-between text-left m-4">
               <div className="form-group col-sm-6 flex-column d-flex">
@@ -144,23 +149,63 @@ const Register = () => {
                 />
               </div>
             </div>
-            {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
-                        <label for="exampleInputPassword1" class="form-label">Work</label>
-                        <input type="text" value={inpval.work} onChange={setdata} name="work" class="form-control" id="exampleInputPassword1" />
-                    </div>
-                    <div class="mb-3 col-lg-6 col-md-6 col-12">
-                        <label for="exampleInputPassword1" class="form-label">Address</label>
-                        <input type="text" value={inpval.add} onChange={setdata} name="add" class="form-control" id="exampleInputPassword1" />
-                    </div>
-                    <div class="mb-3 col-lg-12 col-md-12 col-12">
-                        <label for="exampleInputPassword1" class="form-label">Description</label>
-                        <textarea name="desc" value={inpval.desc} onChange={setdata} className="form-control" id="" cols="30" rows="5"></textarea>
-                    </div> */}
+            <div className="row justify-content-between text-left m-4">
+              <div className="form-group col-sm-6 flex-column d-flex">
+                <label
+                  htmlFor="exampleInputPassword1"
+                  className="form-control-label px-3"
+                >
+                  Meal Time
+                </label>
+                <input
+                  type="number"
+                  value={inpval.price}
+                  onChange={setdata}
+                  name="meal_time"
+                  className="form-control"
+                  id="exampleInputPassword1"
+                />
+              </div>
+              <div className="form-group col-sm-6 flex-column d-flex">
+              <label
+                  htmlFor="exampleInputPassword1"
+                  className="form-control-label px-3"
+                >
+                  Meal Rating
+                </label>
+                {/* <small>- A / NA</small> */}
+                <input
+                  type="text"
+                  value={inpval.rate}
+                  onChange={setdata}
+                  name="meal_famous"
+                  className="form-control"
+                  id="exampleInputPassword1"
+                />
+              </div>
+            </div>
+            <div className="row justify-content-between text-center m-4">
+            <label
+                  htmlFor="exampleInputPassword1"
+                  className="form-control-label px-3"
+                >
+                  Meal Image
+                </label>
+                {/* <small>- A / NA</small> */}
+                <input
+                  type="file"
+                  // value={inpval.img}
+                  // onChange={setdata}
+                  name="meal_img"
+                  className="form-control"
+                  id="exampleInputPassword1"
+                />
+              </div>
             <div className="row justify-content-center">
               <button
                 type="submit"
                 onClick={addinpdata}
-                className="btn btn-primary form-group col-sm-4"
+                className="btn btn-dark form-group col-sm-4"
               >
                 Submit
               </button>
@@ -169,7 +214,7 @@ const Register = () => {
         </div>
       </div>
       </div>
-    </div>
+      </div>
     </>
   );
 };

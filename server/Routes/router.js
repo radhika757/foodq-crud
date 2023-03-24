@@ -9,6 +9,9 @@ const LocalStrategy = require("passport-local").Strategy;
 const jwt = require("jsonwebtoken");
 const JwtStrategy = require("passport-jwt").Strategy;
 const { ExtractJwt } = require("passport-jwt");
+const multer = require("multer");
+const fs = require("fs-extra");
+const upload = multer({ dest: "uploads/" });
 
 router.get("/", (req, res) => {
   connection.query("SELECT * FROM meals", (err, result) => {
@@ -29,34 +32,67 @@ router.get("/getdata", (req, res) => {
       res.status(422).json("No Meals available");
     } else {
       res.status(201).json(result);
+      console.log(result);
     }
   });
 });
 
+//get total meal counts
+router.get("/get_meal_count",(req,res) =>{
+  const query = "SELECT COUNT(*) as count FROM meals";
+  connection.query(query,(error,results,fields)=>{
+    if(error) throw error;
+
+    const count = results[0].count;
+    console.log(`Total number of meals: ${count}`);
+    res.status(201).json(count);
+  })
+})
+
+
 // new meal data
 router.post("/create", (req, res) => {
-  const { meal_name, meal_descr, meal_price, meal_avail } = req.body; //obj destructuring.
+  const {
+    meal_name,
+    meal_descr,
+    meal_price,
+    meal_avail,
+    meal_time,
+    meal_rate,
+  } = req.body; //obj destructuring.
+  // const { filename } = req.file;
+  // console.log(filename);
   try {
-    // console.log("in try loop");
+    console.log(meal_name);
     const dataInsert =
-      "INSERT INTO meals (meal_title, meal_descr, meal_price, meal_avail) VALUES (?,?,?,?)";
+      "INSERT INTO meals (meal_title, meal_descr, meal_price, meal_avail, meal_famous, meal_time) VALUES (?,?,?,?,?,?)";
     connection.query(
       dataInsert,
-      [meal_name, meal_descr, meal_price, meal_avail],
+      [
+        meal_name,
+        meal_descr,
+        meal_price,
+        meal_avail,
+        meal_rate,
+        meal_time,
+       
+      ], 
       (err, result) => {
         // console.log(result);
         if (err) {
-          console.log("error after insert loop" + err);
+          console.log(err);
           res.send(err);
+          console.log(err);
         } else {
           res.status(201).json(req.body);
         }
       }
     );
   } catch (error) {
-    res.status(422).json("else loop of insert", error);
+    res.status(422).json("else loop of insert", error); 
   }
 });
+console.log(`${__dirname}./`);
 
 // Delete meal api
 router.delete("/delete_meal/:id", (req, res) => {
@@ -73,6 +109,7 @@ router.delete("/delete_meal/:id", (req, res) => {
     }
   });
 });
+
 //all-meals
 router.get("/all-meals", (req, res) => {
   connection.query("SELECT * FROM meals", (err, result) => {
@@ -108,7 +145,7 @@ router.patch("/update_meal/:id", (req, res) => {
   console.log("up");
   const { id } = req.params;
   const data = req.body; //updated data
-  console.log(data);
+  console.log(data); 
   connection.query(
     "UPDATE meals SET ? WHERE meal_id = ?",
     [data, id],
@@ -118,6 +155,7 @@ router.patch("/update_meal/:id", (req, res) => {
         console.log(err);
       } else {
         res.status(201).json(result);
+        console.log(result);
       }
     }
   );
@@ -277,6 +315,22 @@ router.get("/get_order", (req, res) => {
     }
   );
 });
+
+// delete order
+router.delete("/delete_order/:id", (req, res) => {
+  // get id from params
+  const { id } = req.params;
+  console.log(id);
+  console.log("id");
+  connection.query("DELETE FROM orders WHERE order_id = ?", id, (err, result) => {
+    if (err) {
+      res.status(422).json("Data not found");
+      console.log(err);
+    } else {
+      res.status(201).json(result);
+    }
+  });
+});
 // new member api
 router.post("/new_member", (req, res) => {
   const memberName = req.body.name;
@@ -310,7 +364,7 @@ router.post("/new_member", (req, res) => {
 });
 
 // get memebers api
-router.get("/all_subscriptions", (req, res) => {  
+router.get("/all_subscriptions", (req, res) => {
   connection.query(
     "SELECT * FROM registers ORDER BY member_id DESC",
     (err, result) => {

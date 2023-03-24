@@ -48,7 +48,7 @@
 
 .card-border{
   display: flex;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 15px 10px;
   flex-wrap: wrap;
   width: 90%;

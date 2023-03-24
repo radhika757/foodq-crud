@@ -1,0 +1,61 @@
+.meal-wrap {
+    display: flex;
+    justify-content: space-between;
+    width: 20em;
+  }
+  .meal {
+    /* display: flex; */
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin: 0.7rem;
+    padding: 1em 1.5em;
+    border: 2px solid #F0F0F0;
+    /* border-radius: 14px; */
+    width: 18em;
+    height: 22em;
+    list-style-type: none;
+  }
+  
+  .meal h4 {
+    margin: 0 0 0.25rem 0;
+  }
+  
+  /* for name, description, price  */
+  .meal-new {
+    padding: 8px;
+  }
+  
+  .fimg {
+    height: 10em;
+    width: 15em;
+    padding: 0px;
+    margin: 0px;
+    /* border-radius: 14px; */
+  }
+  
+  .description {
+    font-style: italic;
+  }
+  
+  .price {
+    margin-top: 0.25rem;
+    font-weight: bold;
+    color: #ad5502;
+    font-size: 1.25rem;
+  }
+  
+  .time{
+    margin-top: 0.45em;
+    font-weight: light;
+  }
+
+  .time span{
+    font-weight: bold;
+    padding: 5px;
+    margin-bottom: 0.55rem;
+  }
+  .block{
+    display: flex;
+    justify-content: space-between;
+    margin: 0.25em 0;
+  }

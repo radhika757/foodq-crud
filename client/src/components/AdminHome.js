@@ -11,7 +11,7 @@ import { Table } from "react-bootstrap";
 
 const AdminHome = () => {
   const [getuserdata, setUserdata] = useState([]);
-  const [isAuthenticated, setIsAuthenticated] = useState(true);  //autentication should be initially false
+  const [isAuthenticated, setIsAuthenticated] = useState(true); //autentication should be initially false
   console.log("hey");
 
   const { udata, setUdata } = useContext(adddata);
@@ -20,24 +20,24 @@ const AdminHome = () => {
 
   const location = useLocation();
   const { state } = location;
-  // let isAuthenticated = false; 
+  // let isAuthenticated = false;
 
   let user = [];
-  useEffect(()=>{
+  useEffect(() => {
     if (state !== undefined) {
       // isAuthenticated = true;
       user.push(state.user);
     }
     console.log(getuserdata);
     console.log(state);
-  console.log(isAuthenticated);
+    console.log(isAuthenticated);
     if (isAuthenticated) {
       setIsAuthenticated(true);
     } else {
       setIsAuthenticated(false);
     }
-  })
-  
+  });
+
   const getdata = async () => {
     const res = await fetch("http://localhost:3001/getdata", {
       method: "GET",
@@ -46,7 +46,7 @@ const AdminHome = () => {
       },
     });
 
-    const data = await res.json(); 
+    const data = await res.json();
     console.log(data);
 
     if (res.status === 422 || !data) {
@@ -88,77 +88,82 @@ const AdminHome = () => {
     <>
       <Navbaar />
       <div className="d-flex">
-      <Sidenav/>
-      {udata ? (
-        <>
-          <div
-            className="alert alert-success alert-dismissible fade show"
-            role="alert"
-          >
-            <strong>{udata.meal_name}</strong> added succesfully!
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="alert"
-              aria-label="Close"
-            ></button>
-          </div>
-        </>
-      ) : (
-        ""
-      )}
-      {updata ? (
-        <>
-          <div
-            className="alert alert-success alert-dismissible fade show"
-            role="alert"
-          >
-            <strong>{updata.meal_name}</strong> updated succesfully!
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="alert"
-              aria-label="Close"
-            ></button>
-          </div>
-        </>
-      ) : (
-        ""
-      )}
+        <Sidenav />
+        {udata ? (
+          <>
+            <div
+              className="alert alert-success alert-dismissible fade show  align-items-center"
+              role="alert"
+            >
+              <strong className="me-2">{udata.meal_name}</strong> added
+              successfully!
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+          </>
+        ) : (
+          ""
+        )}
+        {updata ? (
+          <>
+            <div
+              className="alert alert-success alert-dismissible fade show"
+              role="alert"
+            >
+              <strong>{updata.meal_name}</strong> updated succesfully!
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+          </>
+        ) : (
+          ""
+        )}
 
-      {dltdata ? (
-        <>
-          <div
-            class="alert alert-danger alert-dismissible fade show"
-            role="alert"
-          >
-            <strong>{dltdata.meal_name}</strong>deleted succesfully!
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="alert"
-              aria-label="Close"
-            ></button>
-          </div>
-        </>
-      ) : (
-        ""
-      )}
-      {isAuthenticated && (
-        <div className="mt-4">
-          {/* <div className="container"> */}
+        {dltdata ? (
+          <>
+            <div
+              class="alert alert-danger alert-dismissible fade show"
+              role="alert"
+            >
+              <strong>{dltdata.meal_name}</strong>deleted succesfully!
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+          </>
+        ) : (
+          ""
+        )}
+        {isAuthenticated && (
+          <div className="mt-4">
+            {/* <div className="container"> */}
             {user.map((user) => {
               return <h1>Hey {user.admin_name}</h1>;
             })}
             <div className="row">
               <div className="col">
-                
                 {/* <NavLink to="/register" className="btn btn-outline-primary">
                   Add a Meal
                 </NavLink> */}
-               
 
-                <Table  striped bordered hover style={{width:'70em'}} className="table m-4">
+                <Table
+                  striped
+                  bordered
+                  hover
+                  style={{ width: "70em" }}
+                  className="table m-4"
+                >
                   <thead>
                     <tr>
                       <th scope="col">id</th>
@@ -175,13 +180,12 @@ const AdminHome = () => {
                         <>
                           <tr>
                             <th scope="row">{id + 1}</th>
-                           
+
                             <td>{element.meal_title}</td>
                             <td>{element.meal_descr}</td>
                             <td> $ {element.meal_price} </td>
                             <td>{element.meal_avail}</td>
                             <td className="d-flex justify-content-left">
-                              
                               <NavLink to={`edit/${element.meal_id}`}>
                                 <button className="btn btn-primary btn-sm m-2">
                                   <CreateIcon />
@@ -202,9 +206,8 @@ const AdminHome = () => {
                 </Table>
               </div>
             </div>
-          
-        </div>
-      )}
+          </div>
+        )}
       </div>
     </>
   );

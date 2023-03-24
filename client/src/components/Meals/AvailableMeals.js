@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import mealstyle from "./AvailableMeals.module.css";
 import MealItem from "./MealItems/MealItem";
+import AllMealsList from "./MealItems/AllMealsList";
 import Card from "../UI/Card";
 import sushi from "../assets/lasagna.jpg";
 import rice from "../assets/gelato.jpg";
@@ -13,6 +14,7 @@ import axios from "axios";
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
   const [allMeals, setAllMeals] = useState([]);
+  const [count, setCount] = useState(0);
 
   // const getAllMeals = async
   const getMeals = async () => {
@@ -23,6 +25,11 @@ const AvailableMeals = () => {
     await axios.get("http://localhost:3001/getdata").then((res1) => {
       console.log(res1.data);
       setAllMeals(res1.data);
+    });
+
+    await axios.get("http://localhost:3001/get_meal_count").then((res2) => {
+      console.log(res2.data);
+      setCount(res2.data);
     });
   };
   useEffect(() => {
@@ -45,15 +52,15 @@ const AvailableMeals = () => {
   );
 
   const allMealList = allMeals.map((showAllMeals) => (
-    <MealItem
-        key={showAllMeals.meal_id}
-        id={showAllMeals.meal_id}
-        title={showAllMeals.meal_title}
-        description={showAllMeals.meal_descr}
-        price={showAllMeals.meal_price}
-        img={salad}
-      />
-  ))
+    <AllMealsList
+      key={showAllMeals.meal_id}
+      id={showAllMeals.meal_id}
+      title={showAllMeals.meal_title}
+      description={showAllMeals.meal_descr}
+      price={showAllMeals.meal_price}
+      img={salad}
+    />
+  ));
   return (
     <>
       <section className={mealstyle.meals}>
@@ -64,14 +71,11 @@ const AvailableMeals = () => {
       </section>
       <div className={mealstyle.allmenu}>
         <h2>
-          <b>120 Dishes</b>
-          
+          <b>{count} Dishes</b>
         </h2>
         {/* <h2>Veg/Non-veg</h2> */}
         <span className={mealstyle.border}></span>
-        <div className={mealstyle['card-border']}>
-         {allMealList}
-        </div>
+        <div className={mealstyle["card-border"]}>{allMealList}</div>
       </div>
     </>
   );
