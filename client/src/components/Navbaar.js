@@ -23,7 +23,7 @@ const Navbaar = () => {
   const logoutHandler = async () => {
     await axios.get("http://localhost:3001/logout").then((res) => {
       history.push({
-        pathname: "/",
+        pathname: "/login",
         state: {
           isAuthenticated: false,
         },
@@ -41,7 +41,7 @@ const Navbaar = () => {
             <Nav.Link href="admins" className="">Admin</Nav.Link>
             <Nav.Link href="orders" className="">Orders</Nav.Link>
             <Nav.Link href="subscription" className="">Registers</Nav.Link>
-            <Nav.Link href="" className="">Logout</Nav.Link>
+            <Nav.Link href="" onClick={logoutHandler} className="">Logout</Nav.Link>
           </Nav>
         
       </Navbar>

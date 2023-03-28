@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { NavLink, useLocation } from "react-router-dom";
@@ -12,7 +11,8 @@ import { Table } from "react-bootstrap";
 const AdminHome = () => {
   const [getuserdata, setUserdata] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(true); //autentication should be initially false
-  console.log("hey");
+  const [user, setUser] = useState([]);
+  // console.log(typeof(user));
 
   const { udata, setUdata } = useContext(adddata);
   const { updata, setUPdata } = useContext(updatedata);
@@ -20,23 +20,23 @@ const AdminHome = () => {
 
   const location = useLocation();
   const { state } = location;
+  console.log(location);
   // let isAuthenticated = false;
 
-  let user = [];
+  // let user = [];
   useEffect(() => {
     if (state !== undefined) {
-      // isAuthenticated = true;
-      user.push(state.user);
+      setIsAuthenticated(true);
+      // user.push(state.user);
+      setUser(state.user);
     }
-    console.log(getuserdata);
-    console.log(state);
-    console.log(isAuthenticated);
+    // console.log(isAuthenticated);
     if (isAuthenticated) {
       setIsAuthenticated(true);
     } else {
       setIsAuthenticated(false);
     }
-  });
+  },[]);
 
   const getdata = async () => {
     const res = await fetch("http://localhost:3001/getdata", {
@@ -47,13 +47,13 @@ const AdminHome = () => {
     });
 
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
 
     if (res.status === 422 || !data) {
       console.log("error ");
     } else {
       setUserdata(data);
-      console.log("get data");
+      // console.log("get data");
     }
   };
 
@@ -148,15 +148,11 @@ const AdminHome = () => {
         {isAuthenticated && (
           <div className="mt-4">
             {/* <div className="container"> */}
-            {user.map((user) => {
+            {Object.values(user).map(() => {
               return <h1>Hey {user.admin_name}</h1>;
             })}
             <div className="row">
               <div className="col">
-                {/* <NavLink to="/register" className="btn btn-outline-primary">
-                  Add a Meal
-                </NavLink> */}
-
                 <Table
                   striped
                   bordered

@@ -5,7 +5,7 @@ const connection = require("../db/connection");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-//const logout = require("express-passport-logout");
+const logout = require("express-passport-logout");
 const jwt = require("jsonwebtoken");
 const JwtStrategy = require("passport-jwt").Strategy;
 const { ExtractJwt } = require("passport-jwt");
@@ -38,17 +38,16 @@ router.get("/getdata", (req, res) => {
 });
 
 //get total meal counts
-router.get("/get_meal_count",(req,res) =>{
+router.get("/get_meal_count", (req, res) => {
   const query = "SELECT COUNT(*) as count FROM meals";
-  connection.query(query,(error,results,fields)=>{
-    if(error) throw error;
+  connection.query(query, (error, results, fields) => {
+    if (error) throw error;
 
     const count = results[0].count;
     console.log(`Total number of meals: ${count}`);
     res.status(201).json(count);
-  })
-})
-
+  });
+});
 
 // new meal data
 router.post("/create", (req, res) => {
@@ -68,15 +67,7 @@ router.post("/create", (req, res) => {
       "INSERT INTO meals (meal_title, meal_descr, meal_price, meal_avail, meal_famous, meal_time) VALUES (?,?,?,?,?,?)";
     connection.query(
       dataInsert,
-      [
-        meal_name,
-        meal_descr,
-        meal_price,
-        meal_avail,
-        meal_rate,
-        meal_time,
-       
-      ], 
+      [meal_name, meal_descr, meal_price, meal_avail, meal_rate, meal_time],
       (err, result) => {
         // console.log(result);
         if (err) {
@@ -89,7 +80,7 @@ router.post("/create", (req, res) => {
       }
     );
   } catch (error) {
-    res.status(422).json("else loop of insert", error); 
+    res.status(422).json("else loop of insert", error);
   }
 });
 console.log(`${__dirname}./`);
@@ -145,7 +136,7 @@ router.patch("/update_meal/:id", (req, res) => {
   console.log("up");
   const { id } = req.params;
   const data = req.body; //updated data
-  console.log(data); 
+  console.log(data);
   connection.query(
     "UPDATE meals SET ? WHERE meal_id = ?",
     [data, id],
@@ -161,7 +152,25 @@ router.patch("/update_meal/:id", (req, res) => {
   );
 });
 
-// Admin access
+// Admin del
+router.delete("/delete_admin/:id", (req, res) => {
+  // get id from params
+  const { id } = req.params;
+  console.log(id);
+  console.log("id");
+  connection.query(
+    "DELETE FROM admin_access WHERE admin_id = ?",
+    id,
+    (err, result) => {
+      if (err) {
+        res.status(422).json("Data not found");
+        console.log(err);
+      } else {
+        res.status(201).json(result);
+      }
+    }
+  );
+});
 
 // register admin
 router.post("/add_admin", (req, res) => {
@@ -181,15 +190,13 @@ router.post("/add_admin", (req, res) => {
     "INSERT INTO admin_access (admin_name, admin_email, admin_pass) VALUES (?,?,?)";
   try {
     console.log(admin_name);
-    console.log(admin_email);
-    console.log(admin_pass);
-    console.log(hashedPassword);
+
     connection.query(
       query_admin,
       [admin_name, admin_email, hashedPassword],
       (err, result, res, req) => {
         if (err) throw err;
-        console.log(result);
+        // console.log(result);
         res.send(201).json("New Admin created");
       }
     );
@@ -200,6 +207,84 @@ router.post("/add_admin", (req, res) => {
 // });
 
 // login admin api
+// passport.use(
+//   "local-login",
+//   new LocalStrategy(
+//     {
+//       usernameField: "email",
+//       passwordField: "password",
+//     },
+
+//     async (email, password, done) => {
+//       // console.log(email);
+//       // console.log(password);
+//       try {
+//         // Query the database for the user with the given email
+//         const { results: rows } = await connection.execute(
+//           "SELECT * FROM admin_access WHERE admin_email = ?",
+//           [email]
+//         );
+//         // console.log(rows);
+//         if (!rows) {
+//           // console.log("rows");
+//           return done(null, false, { message: "User data missing" });
+//         }
+//         // compare the password with the hashed password stored.
+//         if (rows.length === 0) {
+//           // console.log("length");
+//           return done(null, false, { message: "No match found" });
+//         }
+//         try {
+//           const match = await bcrypt.compare(password, rows[0].admin_pass);
+//           if (!match) {
+//             console.log(err);
+//             return done(null, false, { message: "Incorrect password" });
+//           }
+//           return done(null, rows[0]);
+//         } catch (err) {
+//           return done(err);
+//         }
+//       } catch (err) {
+//         return done(err);
+//       }
+//     }
+//   )
+// );
+
+// router.post("/login", (req, res, next) => {
+//   passport.authenticate("local-login", { session: false }, (err, user) => {
+//     if (err || !user) {
+//       console.log(err);
+//       console.log(user);
+//       return res.status(401).json({
+        
+//         message: "Authentication failed",
+//         user: user,
+//         isAuthenticated: false,
+//       });
+//     }
+
+//     req.login(user, { session: false }, (err) => {
+//       if (err) {
+//         res.send(err);
+//       }
+//       const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+//       return res.json({
+//         user: user,
+//         token: token,
+//         isAuthenticated: true,
+//       });
+//     });
+//   })(req, res, next);
+// });
+
+// router.post(
+//   "/login",
+//   passport.authenticate("local-login", { session: false }),
+//   (req, res) => {
+//     res.json({ user: req.user, isAuthenticated: true });
+//   }
+// );
 
 passport.use(
   "local-login",
@@ -210,46 +295,73 @@ passport.use(
     },
     async (email, password, done) => {
       try {
-        // Query the database for the user with the given email
-        console.log(email);
-        console.log(password);
-        await connection.execute(
+        console.log(connection);
+        const result = await connection.execute(
+
           "SELECT * FROM admin_access WHERE admin_email = ?",
-          [email],
-          (err, rows) => {
-            if (!rows.length) {
-              res.send("No match");
-              console.log("No match");
-              return done(null, false); // req.flash is the way to set flashdata using connect-flash
-            }
-            // hashing and comparing passwords
-            bcrypt.compare(password, rows[0].admin_pass, (err, match) => {
-              if (!match) {
-                console.log(err);
-                console.log(match);
-                return done(null, false);
-              }
-              return done(null, rows[0]);
-            });
-          }
-        );
+          [email]         
+        ); 
+        if(result && result[0].length>0){
+          const [rows] = result[0];
+        }else{
+          console.log('not found');
+        }
+        console.log(rows);
+        // console.log(rows.admin_email);  
+        if (rows[0].length > 0) {
+          console.log('no match');
+          return done(null, false, { message: "No match found" });
+        }
+        const match = await bcrypt.compare(password, rows[0].admin_pass);
+        if (!match) {
+          console.log('pass');
+          return done(null, false, { message: "Incorrect password" });
+        }
+        return done(null, rows[0]);
       } catch (err) {
-        // console.log('catch');
         return done(err);
       }
     }
   )
 );
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local-login", { session: false }, (err, user) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({
+        message: "Internal server error",
+        isAuthenticated: false,
+      });
+    }
 
-router.post(
-  "/login",
-  passport.authenticate("local-login", { session: false }),
-  (req, res) => {
-    res.json({ user: req.user, isAuthenticated: true });
-  }
-);
-router.get("/logout", (req, res) => {
-  req.logout();
+    if (!user) {
+      console.log("Authentication failed");
+      return res.status(401).json({
+        message: "Authentication failed",
+        isAuthenticated: false,
+      });
+    }
+
+    console.log("Authentication successful");
+    console.log(user);
+
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+    return res.json({
+      user: user,
+      token: token, 
+      isAuthenticated: true,
+    });
+  })(req, res, next);
+});
+
+//logout
+router.post("/logout", (req, res, next) => {
+  req.logout(function () {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/login");
+  });
 });
 
 router.get("/getadmin", (req, res) => {
@@ -322,15 +434,20 @@ router.delete("/delete_order/:id", (req, res) => {
   const { id } = req.params;
   console.log(id);
   console.log("id");
-  connection.query("DELETE FROM orders WHERE order_id = ?", id, (err, result) => {
-    if (err) {
-      res.status(422).json("Data not found");
-      console.log(err);
-    } else {
-      res.status(201).json(result);
+  connection.query(
+    "DELETE FROM orders WHERE order_id = ?",
+    id,
+    (err, result) => {
+      if (err) {
+        res.status(422).json("Data not found");
+        console.log(err);
+      } else {
+        res.status(201).json(result);
+      }
     }
-  });
+  );
 });
+
 // new member api
 router.post("/new_member", (req, res) => {
   const memberName = req.body.name;

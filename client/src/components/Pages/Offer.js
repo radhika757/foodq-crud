@@ -26,7 +26,7 @@ const Offer = (props) => {
           <h5>ENJOY 20% OFF</h5>
           <p>Sign up for exclusive offers on your first order + free shipping over over $30</p>
           <div className={offerstyles.divbtns}>
-            <button className={offerstyles.signbtn} onClick={closeOfferOverlay}>Sign Up</button>
+            <button className={offerstyles.signbtn} onClick={props.onSignup}>Sign Up</button>
             <button onClick={props.onClick} className={offerstyles.nextime}>
               Next time
             </button>

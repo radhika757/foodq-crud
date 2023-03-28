@@ -37,7 +37,7 @@ const User = () => {
         <div className="row d-flex justify-content-center">
           <div className="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
           
-            <h2>Add a new Admin</h2>
+            <h2 className="text-uppercase title text-center mb-2">Add a new Admin</h2>
          
             <form className="form-card mt-4" onSubmit={submitData}>
               <div className="row justify-content-between text-left m-4">

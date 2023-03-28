@@ -17,7 +17,7 @@ const Home = (props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setOfferPopup(true);
-    }, 2000); // popup after 3 secs
+    }, 2000); // popup after 2 secs
     return () => clearTimeout(timer);
   }, []);
 
@@ -29,8 +29,10 @@ const Home = (props) => {
   };
 
   const handleSignUpPopup = () =>{
-    
-    console.log('hey');
+    setOfferPopup(false);
+    const popbody = document.querySelector(".popupbackg");
+    console.log('hi');
+    popbody.classList.remove("popupbackg");
   }
 
   const [cartShow, setCartShow] = useState(false);
@@ -46,7 +48,7 @@ const Home = (props) => {
   return (
     <React.Fragment>
       <div className="popupbackg">
-        {showOfferPopup && <Offer onClick={handleOfferPopup} onSignup={handleSignUpPopup()} />}
+        {showOfferPopup && <Offer onClick={handleOfferPopup} onSignup={handleSignUpPopup} />}
       </div>
       <CartProvider>
         {cartShow && <Cart onClose={hideCartHandler} />}
@@ -55,7 +57,7 @@ const Home = (props) => {
         <main>
           <Meals />
         </main>
-        {/* Fetaures box */}
+       
         <Features/>
         <ChefBox />
         <SignUp />
