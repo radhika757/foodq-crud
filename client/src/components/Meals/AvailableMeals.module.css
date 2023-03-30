@@ -40,6 +40,17 @@
   margin: 2em 4em;
 }
 
+.allmenu h2{
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+
+.filter{
+ font-size: 0.70em;
+}
+
 .border {
   border-bottom: 1px solid #e9e9eb;
   width: 90%;

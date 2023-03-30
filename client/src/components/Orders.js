@@ -48,7 +48,7 @@ const Orders = () => {
       <div className="d-flex">
         <Sidenav />
         <div>
-          <h2 className="text-center m-4">Orders</h2>
+          <h2 className="text-center m-4 text-uppercase title text-center">Orders</h2>
           <Table
             striped
             bordered

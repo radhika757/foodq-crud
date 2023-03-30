@@ -10,9 +10,13 @@
   color: #4d1601;
   display: flex;
   text-align: center;
- 
+ /* width: 30em; */
 }
+.background h4{
+  background-color: aliceblue;
+  padding: 0.25em 0;
 
+}
 .adminname {
   margin-bottom: 1em;
   display: flex;
@@ -26,7 +30,6 @@
 }
 
 .container {
-  
   background-color: white;
   border-radius: 15px;
   padding: 35px 35px;

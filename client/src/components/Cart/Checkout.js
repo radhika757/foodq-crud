@@ -14,9 +14,9 @@ const Checkout = (props) => {
     const username = nameRef.current.value;
     const useradd = addRef.current.value;
     const usernum = numRef.current.value;
-    console.log(username);
-    console.log(useradd);
-    console.log(usernum);
+    // console.log(username);
+    // console.log(useradd);
+    // console.log(usernum);
    
     event.preventDefault();
 
@@ -25,7 +25,7 @@ const Checkout = (props) => {
       client_add: useradd,
       client_num: usernum,
     });
-    
+    // when order placed, state changes setOrder -> true. When order(true) 
 
     setTimeout(() => {
       setOrderShowPopup(true);

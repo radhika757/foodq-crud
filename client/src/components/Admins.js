@@ -13,7 +13,7 @@ const Admins = (props) => {
   Axios.get("http://localhost:3001/getadmin").then((response) => {
     setAdmindata(response.data);
     // alert('Admin Created');
-    //  console.log(response.data);
+     console.log(response.data);
   });
 
   const deleteadmin = async (id) => {

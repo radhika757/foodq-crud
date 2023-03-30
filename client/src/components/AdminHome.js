@@ -12,7 +12,6 @@ const AdminHome = () => {
   const [getuserdata, setUserdata] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(true); //autentication should be initially false
   const [user, setUser] = useState([]);
-  // console.log(typeof(user));
 
   const { udata, setUdata } = useContext(adddata);
   const { updata, setUPdata } = useContext(updatedata);
@@ -21,22 +20,20 @@ const AdminHome = () => {
   const location = useLocation();
   const { state } = location;
   console.log(location);
-  // let isAuthenticated = false;
 
-  // let user = [];
   useEffect(() => {
     if (state !== undefined) {
       setIsAuthenticated(true);
-      // user.push(state.user);
+
       setUser(state.user);
     }
-    // console.log(isAuthenticated);
+
     if (isAuthenticated) {
       setIsAuthenticated(true);
     } else {
       setIsAuthenticated(false);
     }
-  },[]);
+  }, []);
 
   const getdata = async () => {
     const res = await fetch("http://localhost:3001/getdata", {
@@ -45,15 +42,12 @@ const AdminHome = () => {
         "Content-Type": "application/json",
       },
     });
-
     const data = await res.json();
-    // console.log(data);
 
     if (res.status === 422 || !data) {
-      console.log("error ");
+      console.log("error");
     } else {
       setUserdata(data);
-      // console.log("get data");
     }
   };
 
@@ -86,71 +80,73 @@ const AdminHome = () => {
 
   return (
     <>
-      <Navbaar />
+      <Navbaar />{" "}
+      {udata ? (
+        <div className="d-flex flex-row align-items-center" style={{width:"100%"}}>
+          <div
+            className="alert alert-success alert-dismissible fade show  align-items-center"
+            role="alert"
+          >
+            <strong className="me-2">{udata.meal_name}</strong> added
+            successfully!
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+      {updata ? (
+        <>
+          <div
+            className="alert alert-success alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>{updata.meal_name}</strong> updated succesfully!
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+        </>
+      ) : (
+        ""
+      )}
+      {dltdata ? (
+        <>
+          <div
+            class="alert alert-danger alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>{dltdata.meal_name}</strong>deleted succesfully!
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+        </>
+      ) : (
+        ""
+      )}
       <div className="d-flex">
         <Sidenav />
-        {udata ? (
-          <>
-            <div
-              className="alert alert-success alert-dismissible fade show  align-items-center"
-              role="alert"
-            >
-              <strong className="me-2">{udata.meal_name}</strong> added
-              successfully!
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-              ></button>
-            </div>
-          </>
-        ) : (
-          ""
-        )}
-        {updata ? (
-          <>
-            <div
-              className="alert alert-success alert-dismissible fade show"
-              role="alert"
-            >
-              <strong>{updata.meal_name}</strong> updated succesfully!
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-              ></button>
-            </div>
-          </>
-        ) : (
-          ""
-        )}
 
-        {dltdata ? (
-          <>
-            <div
-              class="alert alert-danger alert-dismissible fade show"
-              role="alert"
-            >
-              <strong>{dltdata.meal_name}</strong>deleted succesfully!
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-              ></button>
-            </div>
-          </>
-        ) : (
-          ""
-        )}
         {isAuthenticated && (
           <div className="mt-4">
-            {/* <div className="container"> */}
-            {Object.values(user).map(() => {
-              return <h1>Hey {user.admin_name}</h1>;
-            })}
+            <div className="m-4 ">
+              <h1 className="p-3 mb-2 bg-light text-dark">
+                Willkommen, {user.admin_name}!
+              </h1>
+            </div>
+
             <div className="row">
               <div className="col">
                 <Table

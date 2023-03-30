@@ -5,7 +5,7 @@ const connection = require("../db/connection");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const logout = require("express-passport-logout");
+const { logout } = require("express-passport-logout");
 const jwt = require("jsonwebtoken");
 const JwtStrategy = require("passport-jwt").Strategy;
 const { ExtractJwt } = require("passport-jwt");
@@ -257,7 +257,7 @@ router.post("/add_admin", (req, res) => {
 //       console.log(err);
 //       console.log(user);
 //       return res.status(401).json({
-        
+
 //         message: "Authentication failed",
 //         user: user,
 //         isAuthenticated: false,
@@ -295,29 +295,24 @@ passport.use(
     },
     async (email, password, done) => {
       try {
-        console.log(connection);
-        const result = await connection.execute(
-
+        // Query the database for the user with the given email
+        console.log(email);
+        await connection.execute(
           "SELECT * FROM admin_access WHERE admin_email = ?",
-          [email]         
-        ); 
-        if(result && result[0].length>0){
-          const [rows] = result[0];
-        }else{
-          console.log('not found');
-        }
-        console.log(rows);
-        // console.log(rows.admin_email);  
-        if (rows[0].length > 0) {
-          console.log('no match');
-          return done(null, false, { message: "No match found" });
-        }
-        const match = await bcrypt.compare(password, rows[0].admin_pass);
-        if (!match) {
-          console.log('pass');
-          return done(null, false, { message: "Incorrect password" });
-        }
-        return done(null, rows[0]);
+          [email],
+          (err, rows) => {
+            // call back function
+            if (err) return done(err);
+            if (!rows.length) {
+              return done(null, false); // req.flash is the way to set flashdata using connect-flash
+            }
+            bcrypt.compare(password, rows[0].admin_pass, (err, match) => {
+              console.log(match);
+              if (!match) return done(null, false);
+              return done(null, rows[0]);
+            });
+          }
+        );
       } catch (err) {
         return done(err);
       }
@@ -344,25 +339,40 @@ router.post("/login", (req, res, next) => {
 
     console.log("Authentication successful");
     console.log(user);
-
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+    // console.log( process.env.JWT_SECRET); error => secret or private key must have a value.  constant across all authentications,
+    // while deploying your project , use env variable only ----------
+    const token = jwt.sign(
+      { id: user.id },
+      "GQyVut3ddMz86fM477oet7ZUU0kN2GoPnwY3wOXc6QLzzK9+So5Nn0f0nNTpqfWHstiXG4HstpcrbA1JIM8RIZfISegvh4fRVGaS4t+qrkmwEaP/MZpinua2gTqZp7ryvHJ0tCqswRbzJHwo6o2LjfzSdGYYrElTGtGJhifpDk4="
+    );
     return res.json({
       user: user,
-      token: token, 
+      token: token,
       isAuthenticated: true,
     });
   })(req, res, next);
 });
 
 //logout
-router.post("/logout", (req, res, next) => {
-  req.logout(function () {
+router.post("/logout", function (req, res, next) {
+  console.log("hi");
+  // logout();
+  req.logout(function (err) {
+    console.log("hiee");
     if (err) {
+      console.log(err);
       return next(err);
     }
     res.redirect("/login");
   });
 });
+// router.get("/logout",logout, function (req,res) {
+//   res.status(401).json({
+//     message: "Logged out successfully",
+//     isAuthenticated: false,
+//   });
+//   res.redirect("/login");
+// });
 
 router.get("/getadmin", (req, res) => {
   // console.log('req');

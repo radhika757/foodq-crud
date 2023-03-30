@@ -26,7 +26,7 @@ const Subscription = () => {
       <div className="d-flex">
         <Sidenav />
         <div>
-          <h2 className="text-center m-4">Subscriptions</h2>
+          <h2 className="text-center m-4 text-uppercase title text-center">Subscriptions</h2>
           <Table striped bordered hover style={{width:'70em'}} className="table m-4">
             <thead>
               <tr>

@@ -3,10 +3,11 @@ import React, { useState, useEffect } from "react";
 import mealstyle from "./AvailableMeals.module.css";
 import MealItem from "./MealItems/MealItem";
 import AllMealsList from "./MealItems/AllMealsList";
-import Card from "../UI/Card";
-import sushi from "../assets/lasagna.jpg";
-import rice from "../assets/gelato.jpg";
-import schnit from "../assets/schnitzel.jpg";
+// import Card from "../UI/Card";
+// import sushi from "../assets/lasagna.jpg";
+// import rice from "../assets/gelato.jpg";
+// import schnit from "../assets/schnitzel.jpg";
+import Switch from 'react-switch';
 import salad from "../assets/salad.jpg";
 import axios from "axios";
 // an array of dummy meals (fetch this from a database)
@@ -72,8 +73,17 @@ const AvailableMeals = () => {
       <div className={mealstyle.allmenu}>
         <h2>
           <b>{count} Dishes</b>
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input "
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckDefault"
+            />
+            <span className={mealstyle.filter}>Veg Only</span>
+          </div>
         </h2>
-        {/* <h2>Veg/Non-veg</h2> */}
+
         <span className={mealstyle.border}></span>
         <div className={mealstyle["card-border"]}>{allMealList}</div>
       </div>

@@ -11,46 +11,70 @@ const LoginPage = () => {
   const [err, setErr] = useState("");
   const history = useHistory();
 
-  const loginHandler = async () => {
+  const loginHandler = async (event) => {
+    event.preventDefault();
     try {
-      axios.post("http://localhost:3001/login", {
-          email: email,
-          password: password,
-        }).then((res) => {  // takes a callback f(), handles servers response. Passes to the f() as res.
-          const userData = res.data.user;
-          const isAuthenticated = res.data.isAuthenticated;
-
-          if (res.data.isAuthenticated) {
-            history.push({  // updating the browser history. 
-              // parameters : pathname, state 
-              pathname: "/AdminHome",
-              failureRedirect: "/login",
-              state: { user: userData, isAuthenticated },
-            });
-          }
+      const res = await axios.post("http://localhost:3001/login", {
+        email: email,
+        password: password,
+      });
+      const userData = res.data.user;
+      const isAuthenticated = res.data.isAuthenticated;
+      if (isAuthenticated) {
+        history.push({
+          pathname: "/AdminHome",
+          failureRedirect: "/login",
+          state: { user: userData, isAuthenticated },
         });
+      } else if (res.status === 401) {
+        const authError = await res.json();
+        // display authentication error message to user
+       console.log(authError);
+        setErr(err.response.data.message);
+      
+      } else if (res.status === 500) {
+        const internalErr = await res.json();
+        setErr(err.response.data.message)
+      }
     } catch (err) {
       setErr(err.response.data.message);
       console.log(err.response.data.message);
     }
   };
 
-  const submitHandler = (event) => {
-    event.preventDefault();
-    loginHandler();
-  };
+  // const submitHandler = (event) => {
+  //   event.preventDefault();
+  //   loginHandler();
+  // };
 
   return (
     <React.Fragment>
-      {err && <><h1>{err}</h1></>} 
       <div className="background">
+        {err && (
+          <>
+            <div
+              className="alert alert-danger alert-dismissible fade show  align-items-center"
+              role="alert"
+            >
+              <strong className="me-2">
+                <b>{err}</b>
+              </strong>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+          </>
+        )}
         <Link to="/">
           <h2 className="logoname">FoodQ</h2>
         </Link>
         <div className="container">
           <h2 className="adminname">Admin Login</h2>
 
-          <form className="form" onSubmit={submitHandler}>
+          <form className="form" onSubmit={loginHandler}>
             <input
               type="text"
               name="email"
