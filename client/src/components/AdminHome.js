@@ -80,7 +80,7 @@ const AdminHome = () => {
 
   return (
     <>
-      <Navbaar />{" "}
+      <Navbaar />
       {udata ? (
         <div className="d-flex flex-row align-items-center" style={{width:"100%"}}>
           <div
@@ -124,7 +124,7 @@ const AdminHome = () => {
             class="alert alert-danger alert-dismissible fade show"
             role="alert"
           >
-            <strong>{dltdata.meal_name}</strong>deleted succesfully!
+            <strong>{dltdata.meal_title}</strong>deleted succesfully!
             <button
               type="button"
               class="btn-close"

@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import formstyles from "./SignUpForm.module.css";
+import NavLink from "react-bootstrap/esm/NavLink";
 import { signInSchema } from "./FormValidation";
 import axios from "axios";
 import SweetAlert from "react-bootstrap-sweetalert";
@@ -45,7 +46,7 @@ const SignUpForm = (props) => {
       <div className={formstyles["main-frame"]}>
         <h3>Become a member</h3>
         <h6>
-          <span style={{ color: "#b94517" }}>Unlock coupons worth 500* </span>
+          <NavLink href="/login"><span style={{ color: "#b94517" }}>or login to your account </span></NavLink>
         </h6>
 
         <form onSubmit={validateUser}>

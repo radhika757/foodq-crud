@@ -13,6 +13,7 @@ import LoginPage from "./components/LoginPage/LoginPage";
 import Home from "./components/Pages/Home";
 import Orders from "./components/Orders";
 import Subscription from "./components/Subscription";
+import LogIn from "./components/LoginPage/LogIn";
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
         <Route exact path="/edit/:id" component={Edit} />
         <Route exact path="/view/:id" component={Details} />
         <Route exact path="/login" component={LoginPage} />
+        {/* <Route exact path="*" component={Error}/> */}
+        {/* <Route exact path="/PageLog" component={LogIn} /> DEMO */}
       </Switch>
     </>
   );

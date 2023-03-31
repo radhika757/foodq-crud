@@ -14,8 +14,21 @@
     width: 18em;
     height: 22em;
     list-style-type: none;
+    animation: Allmeals-appear 1s ease-out forwards;
   }
+
+  @keyframes Allmeals-appear {
+    from {
+      opacity: 0;
+      transform: translateY(3rem);
+    }
   
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .meal h4 {
     margin: 0 0 0.25rem 0;
   }

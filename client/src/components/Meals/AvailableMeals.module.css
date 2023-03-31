@@ -38,17 +38,29 @@
   flex-flow: column;
   width: 100%;
   margin: 2em 4em;
+  animation: Allmeals-appear 2s ease-out forwards;
 }
 
-.allmenu h2{
+@keyframes Allmeals-appear {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.allmenu h2 {
   display: flex;
   justify-content: space-between;
   width: 90%;
 }
 
-
-.filter{
- font-size: 0.70em;
+.filter {
+  font-size: 0.7em;
+  animation: Allmeals-appear 2s ease-out forwards;
 }
 
 .border {
@@ -57,12 +69,13 @@
   margin: 0.75em 0;
 }
 
-.card-border{
+.card-border {
   display: flex;
-  /* border: 1px solid black; */
+  
   padding: 15px 10px;
   flex-wrap: wrap;
   width: 90%;
+  animation: Allmeals-appear 2s ease-out forwards;
 }
 
 @media only screen and (max-width: 768px) {

@@ -1,7 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Sarabun&family=Shantell+Sans:wght@800&family=Sofia+Sans+Semi+Condensed&family=Source+Serif+Pro&display=swap");
 
+body {
+  overflow: scroll;
+}
+
+.contain {
+  display: flex;
+}
+.illus {
+  width: 50em;
+}
+.illus img {
+  width: 100%;
+}
+
 .logoname {
-  margin: 25px;
+  margin: 15px;
   font-weight: bolder;
   font-size: xx-large;
   font-family: "Sarabun", sans-serif;
@@ -10,12 +24,26 @@
   color: #4d1601;
   display: flex;
   text-align: center;
- /* width: 30em; */
 }
-.background h4{
+
+.login_btns {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.login_btns button {
+  padding: 15px 15px;
+  margin: 15px;
+  width: 6em;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.background h4 {
   background-color: aliceblue;
   padding: 0.25em 0;
-
+  margin: 0em;
 }
 .adminname {
   margin-bottom: 1em;
@@ -29,35 +57,40 @@
   justify-content: center;
 }
 
+.nav-pills .nav-link{
+  color: black;
+}
+
+.nav-pills .nav-link.active{
+  background-color: black;
+}
+
 .container {
   background-color: white;
   border-radius: 15px;
+  margin-top: 50px;
   padding: 35px 35px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 32em;
-  position: relative;
-  top: 5em;
+  width: 25em;
 }
 
 .container input {
-  margin: 0;
+  border-radius: 0px;
   padding: 15px 15px;
 }
 
+.bottom {
+  border-bottom: none;
+}
 .background {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
+  width: 50%;
   overflow: hidden;
-  background-image: url("../assets/cool-background.png");
+  background-color: lavenderblush;
 }
 
 .btnlogin {
-  
   padding: 10px 10px;
   width: 5em;
   position: relative;

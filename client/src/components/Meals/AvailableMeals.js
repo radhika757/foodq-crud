@@ -3,11 +3,6 @@ import React, { useState, useEffect } from "react";
 import mealstyle from "./AvailableMeals.module.css";
 import MealItem from "./MealItems/MealItem";
 import AllMealsList from "./MealItems/AllMealsList";
-// import Card from "../UI/Card";
-// import sushi from "../assets/lasagna.jpg";
-// import rice from "../assets/gelato.jpg";
-// import schnit from "../assets/schnitzel.jpg";
-import Switch from 'react-switch';
 import salad from "../assets/salad.jpg";
 import axios from "axios";
 // an array of dummy meals (fetch this from a database)
@@ -15,7 +10,9 @@ import axios from "axios";
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
   const [allMeals, setAllMeals] = useState([]);
+  const [vegOnly, setVegOnly] = useState(false);
   const [count, setCount] = useState(0);
+  const [vegCount, setVegCount] = useState(0);
 
   // const getAllMeals = async
   const getMeals = async () => {
@@ -32,10 +29,28 @@ const AvailableMeals = () => {
       console.log(res2.data);
       setCount(res2.data);
     });
+
+    await axios.get("http://localhost:3001/get_veg_count").then((response) =>{
+      console.log(response.data);
+      setVegCount(response.data);
+    })
   };
   useEffect(() => {
     getMeals();
   }, []);
+
+  // veg meals
+  const getVegOnlyToggle = () => {
+    setVegOnly(!vegOnly);
+    setCount(vegCount);
+    if (!vegOnly) {
+      axios.get("http://localhost:3001/meals/veg").then((response) => {
+        setAllMeals(response.data);
+      });
+    } else {
+      getMeals();
+    }
+  };
 
   const favList = meals.map(
     (meal) => (
@@ -49,7 +64,6 @@ const AvailableMeals = () => {
         img={salad}
       />
     )
-    // returning a JSX element which represents this meal item.
   );
 
   const allMealList = allMeals.map((showAllMeals) => (
@@ -73,12 +87,14 @@ const AvailableMeals = () => {
       <div className={mealstyle.allmenu}>
         <h2>
           <b>{count} Dishes</b>
-          <div class="form-check form-switch">
+          <div className="form-check form-switch">
             <input
-              class="form-check-input "
+              className="form-check-input "
               type="checkbox"
               role="switch"
               id="flexSwitchCheckDefault"
+              checked={vegOnly}
+              onChange={getVegOnlyToggle}
             />
             <span className={mealstyle.filter}>Veg Only</span>
           </div>

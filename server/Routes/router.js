@@ -37,6 +37,30 @@ router.get("/getdata", (req, res) => {
   });
 });
 
+// get veg meals
+router.get("/meals/veg", (req, res) => {
+  connection.query(
+    "SELECT * FROM meals WHERE meal_type='veg'",
+    (err, result) => {
+      if (err) {
+        throw err;
+      }
+      res.send(result);
+    }
+  );
+});
+
+// total veg meals
+router.get("/get_veg_count", (req, res) => {
+  const query = "SELECT COUNT(*) as count FROM meals WHERE meal_type='veg' ";
+  connection.query(query, (error, results, fields) => {
+    if (error) throw error;
+    const count = results[0].count; 
+    console.log(`Total number of meals: ${count}`);
+    res.status(201).json(count);
+  });
+});
+
 //get total meal counts
 router.get("/get_meal_count", (req, res) => {
   const query = "SELECT COUNT(*) as count FROM meals";
