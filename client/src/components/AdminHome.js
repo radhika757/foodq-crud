@@ -86,6 +86,7 @@ const AdminHome = () => {
           <div
             className="alert alert-success alert-dismissible fade show  align-items-center"
             role="alert"
+            style={{width:"90%"}}
           >
             <strong className="me-2">{udata.meal_name}</strong> added
             successfully!

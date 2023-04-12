@@ -1,5 +1,10 @@
 .form {
     text-align: right;
+    position: absolute;
+    display: flex;
+    width: 10%;
+    top: 15em;
+    justify-content: space-around;
   }
   
   .form button {

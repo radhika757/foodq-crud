@@ -17,7 +17,8 @@ const Register = () => {
     meal_price: 0,
     meal_avail: "",
     meal_time:0,
-    meal_rate:0
+    meal_rate:0,
+    meal_type: ''
   });
   console.log(inpval);
   const setdata = (e) => {
@@ -34,7 +35,7 @@ const Register = () => {
   const addinpdata = async (e) => {
     e.preventDefault();
 
-    const { meal_name, meal_descr, meal_price, meal_avail, meal_time,meal_rate } = inpval;
+    const { meal_name, meal_descr, meal_price, meal_avail, meal_time,meal_rate, meal_type } = inpval;
     // console.log(inpval);
 
     const res = await fetch("http://localhost:3001/create", {
@@ -49,7 +50,8 @@ const Register = () => {
         meal_price,
         meal_avail,
         meal_time,
-        meal_rate
+        meal_rate,
+        meal_type
       }),
     });
 
@@ -138,7 +140,7 @@ const Register = () => {
                 >
                   Meal availabilty
                 </label>
-                {/* <small>- A / NA</small> */}
+                <small style={{color:"lightsalmon"}}>A/NA</small>
                 <input
                   type="text"
                   value={inpval.mobile}
@@ -173,7 +175,7 @@ const Register = () => {
                 >
                   Meal Rating
                 </label>
-                {/* <small>- A / NA</small> */}
+                
                 <input
                   type="text"
                   value={inpval.rate}
@@ -185,13 +187,14 @@ const Register = () => {
               </div>
             </div>
             <div className="row justify-content-between text-center m-4">
+            <div className="form-group col-sm-6 flex-column d-flex">
             <label
                   htmlFor="exampleInputPassword1"
                   className="form-control-label px-3"
                 >
                   Meal Image
                 </label>
-                {/* <small>- A / NA</small> */}
+               
                 <input
                   type="file"
                   // value={inpval.img}
@@ -200,6 +203,24 @@ const Register = () => {
                   className="form-control"
                   id="exampleInputPassword1"
                 />
+                </div>
+                <div className="form-group col-sm-6 flex-column d-flex">
+              <label
+                  htmlFor="exampleInputPassword1"
+                  className="form-control-label px-3"
+                >
+                  Meal Type
+                </label> 
+                <small style={{color:"lightsalmon"}}>Veg/Non-veg</small>
+                <input
+                  type="text"
+                  value={inpval.type}
+                  onChange={setdata}
+                  name="meal_famous"
+                  className="form-control"
+                  id="exampleInputPassword1"
+                />
+              </div>
               </div>
             <div className="row justify-content-center">
               <button

@@ -5,9 +5,7 @@ import Navbaar from "./Navbaar";
 import Sidenav from "./Sidenav";
 
 const Edit = () => {
-  // const [getuserdata, setUserdata] = useState([]);
-  // console.log(getuserdata);
-
+  
   const { updata, setUPdata } = useContext(updatedata);
 
   const history = useHistory("");
@@ -18,9 +16,9 @@ const Edit = () => {
     meal_price: 0,
     meal_avail: "",
   });
-  // console.log(inpval);
+  
   const setdata = (e) => {
-    // console.log(e.target.value);
+   
     const { name, value } = e.target;
     setINP((preval) => {
       return {
@@ -216,6 +214,7 @@ const Edit = () => {
                   </div>
                 </div>
                 <div className="row justify-content-between text-center m-4">
+                <div className="form-group col-sm-6 flex-column d-flex">
                   <label
                     htmlFor="exampleInputPassword1"
                     className="form-control-label px-3"
@@ -232,6 +231,24 @@ const Edit = () => {
                     className="form-control"
                     id="exampleInputPassword1"
                   />
+                  </div>
+                  <div className="form-group col-sm-6 flex-column d-flex">
+                    <label
+                      htmlFor="exampleInputPassword1"
+                      className="form-control-label px-3"
+                    >
+                      Meal Type
+                    </label>
+                    {/* <small>- A / NA</small> */}
+                    <input
+                      type="text"
+                      value={inpval.meal_type}
+                      onChange={setdata}
+                      name="meal_famous"
+                      className="form-control"
+                      id="exampleInputPassword1"
+                    />
+                  </div>
                 </div>
                 <button
                   type="submit"

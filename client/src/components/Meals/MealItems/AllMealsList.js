@@ -27,7 +27,7 @@ const AllMealsList = (props) => {
       <li className={styles.meal}>
         {/* Rendering rame of the meal through props */}
 
-        <img className={styles.fimg} src={props.img} />
+        <img className={styles.fimg} src={require(`../../assets/meals/${props.img}`)} />
         <div className={styles["meal-new"]}>
           <h4>{props.title}</h4>
           <div className={styles.description}>{props.description}</div>

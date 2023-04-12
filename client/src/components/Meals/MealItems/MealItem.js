@@ -4,6 +4,7 @@ import React from "react";
 import styles from "./MealItem.module.css";
 import MealItemForm from "./MealItemForm";
 import CartContext from "../../../Store/cart-context";
+// import img from '../../assets/meals/'
 
 const MealItem = (props) => {
   const cartCtx = useContext(CartContext);
@@ -25,9 +26,9 @@ const MealItem = (props) => {
     // wrapper around every meal item. className={styles['meal-wrap']}
     <div>
       <li className={styles.meal}>
-        {/* Rendering rame of the meal through props */}
+        {/* Rendering rame of the meal through props src={props.img} */}
 
-        <img className={styles.fimg} src={props.img} />
+        <img className={styles.fimg}  src={require(`../../assets/meals/${props.img}`)}  />
         <div className={styles["meal-new"]}>
           <h3>{props.title}</h3>
           <div className={styles.description}>{props.description}</div>

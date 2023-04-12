@@ -82,16 +82,17 @@ router.post("/create", (req, res) => {
     meal_avail,
     meal_time,
     meal_rate,
+    meal_type
   } = req.body; //obj destructuring.
   // const { filename } = req.file;
   // console.log(filename);
   try {
     console.log(meal_name);
     const dataInsert =
-      "INSERT INTO meals (meal_title, meal_descr, meal_price, meal_avail, meal_famous, meal_time) VALUES (?,?,?,?,?,?)";
+      "INSERT INTO meals (meal_title, meal_descr, meal_price, meal_avail, meal_famous, meal_time, meal_type) VALUES (?,?,?,?,?,?,?)";
     connection.query(
       dataInsert,
-      [meal_name, meal_descr, meal_price, meal_avail, meal_rate, meal_time],
+      [meal_name, meal_descr, meal_price, meal_avail, meal_rate, meal_time,meal_type],
       (err, result) => {
         // console.log(result);
         if (err) {
@@ -529,4 +530,4 @@ router.get("/all_subscriptions", (req, res) => {
   );
 });
 
-module.exports = router;
+  module.exports = router;

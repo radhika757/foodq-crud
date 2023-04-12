@@ -78,6 +78,9 @@
   animation: Allmeals-appear 2s ease-out forwards;
 }
 
+.form-check-input:checked{
+  background-color: green;
+}
 @media only screen and (max-width: 768px) {
   .meals ul {
     margin: 0 1em;

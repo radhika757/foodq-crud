@@ -6,12 +6,12 @@
 .meal {
   display: flex;
   justify-content: flex-start;
-  margin: 0.7rem;
+  margin: 0.6rem;
   padding: 1em;
   border: 2px solid #ccc;
   border-radius: 14px;
   width: 19em;
-  
+  height: 14em;
 }
 
 .meal h3 {
@@ -25,11 +25,13 @@
 
 .fimg {
   height: 8em;
-  width: 10em;
+  width: 8em;
   padding: 0px;
   margin: 0px;
-  border-radius: 14px;
+  border-radius: 5px;
 }
+
+
 
 .description {
   font-style: italic;

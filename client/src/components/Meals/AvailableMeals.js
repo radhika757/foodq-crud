@@ -13,11 +13,11 @@ const AvailableMeals = () => {
   const [vegOnly, setVegOnly] = useState(false);
   const [count, setCount] = useState(0);
   const [vegCount, setVegCount] = useState(0);
-
+  console.log(meals);
   // const getAllMeals = async
   const getMeals = async () => {
     await axios.get("http://localhost:3001/famous_meals").then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       setMeals(res.data);
     });
     await axios.get("http://localhost:3001/getdata").then((res1) => {
@@ -26,14 +26,14 @@ const AvailableMeals = () => {
     });
 
     await axios.get("http://localhost:3001/get_meal_count").then((res2) => {
-      console.log(res2.data);
+      // console.log(res2.data);
       setCount(res2.data);
     });
 
-    await axios.get("http://localhost:3001/get_veg_count").then((response) =>{
-      console.log(response.data);
+    await axios.get("http://localhost:3001/get_veg_count").then((response) => {
+      // console.log(response.data);
       setVegCount(response.data);
-    })
+    });
   };
   useEffect(() => {
     getMeals();
@@ -52,19 +52,17 @@ const AvailableMeals = () => {
     }
   };
 
-  const favList = meals.map(
-    (meal) => (
-      // map all the meals by passing function to map which is executed for every meal
-      <MealItem
-        key={meal.meal_id}
-        id={meal.meal_id}
-        title={meal.meal_title}
-        description={meal.meal_descr}
-        price={meal.meal_price}
-        img={salad}
-      />
-    )
-  );
+  const favList = meals.map((meal) => (
+    // map all the meals by passing function to map which is executed for every meal
+    <MealItem
+      key={meal.meal_id}
+      id={meal.meal_id}
+      title={meal.meal_title}
+      description={meal.meal_descr}
+      price={meal.meal_price}
+      img={meal.img}
+    />
+  ));
 
   const allMealList = allMeals.map((showAllMeals) => (
     <AllMealsList
@@ -73,14 +71,14 @@ const AvailableMeals = () => {
       title={showAllMeals.meal_title}
       description={showAllMeals.meal_descr}
       price={showAllMeals.meal_price}
-      img={salad}
+      img={showAllMeals.img}
     />
   ));
   return (
     <>
       <section className={mealstyle.meals}>
         <h3 className={mealstyle.order}>
-          <i>Our most ordered cuisine</i>
+          <b>Our most ordered cuisine</b>
         </h3>
         <ul>{favList}</ul>
       </section>
