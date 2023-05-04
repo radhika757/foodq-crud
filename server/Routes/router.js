@@ -3,8 +3,10 @@ const { connect, query } = require("../db/connection");
 const router = new express.Router();
 const connection = require("../db/connection");
 const bcrypt = require("bcrypt");
+//passport
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const session = require('express-session');
 const { logout } = require("express-passport-logout");
 const jwt = require("jsonwebtoken");
 const JwtStrategy = require("passport-jwt").Strategy;
@@ -311,6 +313,14 @@ router.post("/add_admin", (req, res) => {
 //   }
 // );
 
+router.use(passport.session({
+  secret:'mykey',
+  resave:false,
+  saveUninitialized: false
+}));
+router.use(passport.initialize());
+router.use(passport.session());
+
 passport.use(
   "local-login",
   new LocalStrategy(
@@ -381,16 +391,18 @@ router.post("/login", (req, res, next) => {
 //logout
 router.post("/logout", function (req, res, next) {
   console.log("hi");
-  // logout();
-  req.logout(function (err) {
-    console.log("hiee");
-    if (err) {
-      console.log(err);
-      return next(err);
-    }
-    res.redirect("/login");
-  });
+  req.logout();
+  res.redirect("/login");
+  // req.logout(function (err) {
+  //   console.log(err);
+  //   if (err) {
+  //     console.log(err);
+  //     return next(err);
+  //   }
+  //   res.redirect("/login");
+  // });
 });
+
 // router.get("/logout",logout, function (req,res) {
 //   res.status(401).json({
 //     message: "Logged out successfully",

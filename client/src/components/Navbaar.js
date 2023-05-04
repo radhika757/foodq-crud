@@ -21,7 +21,8 @@ const Navbaar = () => {
     }
   }
   const logoutHandler = async () => {
-    await axios.get("http://localhost:3001/logout").then((res) => {
+    console.log('logouthandler');
+    await axios.post("http://localhost:3001/logout").then((res) => {
       history.push({
         pathname: "/login",
         state: {
